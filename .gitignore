@@ -22,3 +22,5 @@ client/yarn-debug.log*
 client/yarn-error.log*
 venv/
 worldmap.code-workspace
+.env 
+server-dest/
