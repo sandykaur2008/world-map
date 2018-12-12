@@ -1,25 +1,18 @@
 {
-  "name": "worldmap",
-  "version": "0.1.0",
-  "private": true,
-  "dependencies": {
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
-    "react-scripts": "2.1.1"
-  },
+  "name": "world-map",
+  "version": "1.0.0",
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "client": "cd client && npm start",
+    "server": "node server/server.js",
+    "dev": "concurrently --kill-others-on-fail \"npm server\" \"npm client\""
   },
-  "eslintConfig": {
-    "extends": "react-app"
+  "dependencies": {
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4"
   },
-  "browserslist": [
-    ">0.2%",
-    "not dead",
-    "not ie <= 11",
-    "not op_mini all"
-  ]
+  "devDependencies": {
+    "concurrently": "^4.0.1"
+  },
+  "proxy": "http://localhost:5000"
 }
