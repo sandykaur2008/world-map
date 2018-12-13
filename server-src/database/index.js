@@ -6,7 +6,8 @@ mongoose.Promise = global.Promise;
 //27017 is the default mongoDB port
 const uri = 'mongodb://localhost:27017/world-map'; 
 
-mongoose.connect(uri).then(
+export function dbConnection() { 
+  mongoose.connect(uri).then(
     () => { 
         /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
         console.log('Connected to Mongo');
@@ -19,6 +20,4 @@ mongoose.connect(uri).then(
          
         }
   );
-
-
-export const dbConnection = mongoose.connection; 
+} 

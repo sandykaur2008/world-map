@@ -1,4 +1,7 @@
 import User from '../database/models/user'; 
+const mongoose = require("mongoose");
+mongoose.Promise = global.Promise;
+
 
 export function addUser({username, password}) {
   User.findOne({ username: username }, (err, user) => {

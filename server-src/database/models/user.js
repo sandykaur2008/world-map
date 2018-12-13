@@ -1,15 +1,14 @@
 import mongoose from 'mongoose'; 
-const Schema = mongoose.Schema; 
 import bcrypt from 'bcryptjs';
-mongoose.promise = Promise; 
+mongoose.Promise = global.Promise; 
 
 // Define userSchema
-const userSchema = new Schema({
+const userSchema = new mongoose.Schema({
 
 	username: { type: String, unique: false, required: false },
 	password: { type: String, unique: false, required: false }
 
-})
+}); 
 
 // Define schema methods
 userSchema.methods = {
@@ -19,7 +18,7 @@ userSchema.methods = {
 	hashPassword: plainTextPassword => {
 		return bcrypt.hashSync(plainTextPassword, 10); 
 	}
-}
+};
 
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
@@ -34,4 +33,4 @@ userSchema.pre('save', function (next) {
 	}
 }); 
 
-export const User = mongoose.model('User', userSchema); 
+export default mongoose.model('User', userSchema); 

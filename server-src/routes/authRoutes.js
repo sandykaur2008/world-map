@@ -2,7 +2,7 @@
 import express from 'express';
 import * as auth from '../controllers/authController'; 
 const authRouter = express.Router(); 
-import passport from '../passport'; 
+import passport from 'passport'; 
 
 export function arouter() {
   authRouter.route('/')
