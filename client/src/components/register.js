@@ -25,23 +25,16 @@ class Register extends Component {
 		axios.post('/auth/', {
 			username: this.state.username,
 			password: this.state.password
-		}, {
-      headers: {
-        'CSRF-Token': this.props.csrf}
-    })
+		}, {withCredentials: true})
 			.then(response => {
 				console.log(response)
 				if (!response.data.error) {
 					console.log('successful signup'); 
 					this.setState({ //redirect to login page
-            redirectTo: '/login',
-            csrf: response.data.csrf 
+            redirectTo: '/login'
 					}); 
 				} else {
           console.log('username already taken'); 
-          this.setState({ 
-            csrf: response.data.csrf 
-					}); 
 				}
 			}).catch(error => {
 				console.log('signup error: '); 

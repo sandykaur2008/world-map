@@ -12,15 +12,12 @@ class Navbar extends Component {
     logout(event) {
         event.preventDefault(); 
         console.log('logging out'); 
-        axios.post('/auth/logout', {}, {headers: {
-          'CSRF-Token': this.props.csrf}
-      }).then(response => {
+        axios.post('/auth/logout', {withCredentials: true}).then(response => {
           console.log(response.data); 
           if (response.status === 200) {
             this.props.updateUser({
               loggedIn: false,
-              username: null,
-              csrf: response.data.csrf
+              username: null
             }); 
           }
         }).catch(error => {

@@ -29,9 +29,7 @@ class LoginForm extends Component {
             .post('/auth/login', {
                 username: this.state.username,
                 password: this.state.password
-            }, {headers: {
-              'Cookie': 'csrftoken=' + this.props.csrf}
-          })
+            }, {withCredentials: true})
             .then(response => {
                 console.log('login response: '); 
                 console.log(response); 
@@ -39,8 +37,7 @@ class LoginForm extends Component {
                     // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
-                        username: response.data.username,
-                        csrf: response.data.csrf
+                        username: response.data.username
                     }); 
                     // update the state to redirect to home
                     this.setState({

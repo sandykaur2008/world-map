@@ -12,8 +12,7 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false, 
-      username: null,
-      csrf: null
+      username: null
     }; 
 
     this.getUser = this.getUser.bind(this); 
@@ -30,7 +29,7 @@ class App extends Component {
   }
 
   getUser() {
-    axios.get('/auth/').then(response => {
+    axios.get('/auth/', {withCredentials: true}).then(response => {
       console.log('Get user response: '); 
       console.log(response.data); 
       if (response.data.user) {
@@ -38,15 +37,13 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username,
-          csrf: response.data.csrf
+          username: response.data.user.username
         }); 
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null,
-          csrf: response.data.csrf
+          username: null
         }); 
       }
     }); 
