@@ -3,25 +3,22 @@ const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
 
 
-export function addUser({username, password}) {
-  User.findOne({ username: username }, (err, user) => {
-    if (err) {
-        console.log('User.js post error: ', err); 
-    } else if (user) {
-        return null; 
-    }
-    else {
+export async function addUser({username, email, password}) {
+  try {
+    const user = await User.findOne({$or: [
+      { username: username },
+      {email: email}
+    ]}); 
+      if (user === null) {
         const newUser = new User({
             username: username,
+            email: email,
             password: password
-        })
-        newUser.save((err, savedUser) => {
-            if (err) {
-              console.log(err); 
-            } else {
-              return savedUser; 
-            }
         }); 
-    }
-  }); 
-} 
+        newUser.save();
+        return newUser;
+      } 
+     } catch (err) {
+  console.log(err); 
+  }
+}

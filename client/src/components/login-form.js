@@ -8,7 +8,8 @@ class LoginForm extends Component {
         this.state = {
             username: '',
             password: '',
-            redirectTo: null
+            redirectTo: null,
+            errors: false
         }; 
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.handleChange = this.handleChange.bind(this); 
@@ -45,19 +46,23 @@ class LoginForm extends Component {
                     }); 
                 }
             }).catch(error => {
-                console.log('login error: '); 
-                console.log(error);
-                
+                this.setState({
+                  errors: true
+                });                 
             }); 
     }
 
     render() {
+        const errors = this.state.errors;
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
               <div className="login"> 
                 <h4>Login</h4>
+                {errors ? (
+                  <strong>Invalid user information</strong>
+                ) : (<br></br>)}
                 <form >
                   <label className="form-label" htmlFor="username">Username</label>
                   <input className="form-input"

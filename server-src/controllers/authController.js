@@ -1,5 +1,6 @@
 'use strict'; 
 import * as auth from '../config/auth';
+import { validationResult } from 'express-validator/check';  
 
 export function getRegister(req, res) {
   if (req.user) {
@@ -11,14 +12,19 @@ export function getRegister(req, res) {
 
 export function postRegister(req, res) {
   console.log('user signup');
-  const results = auth.addUser(req.body); 
-  if (results) {
-    res.json(results); 
-  } else {
-    res.json({
-      error: `Sorry, already a user with the username: ${req.body.username}`
-    });
-  }
+  const errors = validationResult(req);
+  if (!errors.isEmpty()) {
+    const error = errors.array(); 
+    return res.json({error: error});
+    } 
+  auth.addUser(req.body).then((results) => {
+    if (results) {
+      return res.send("success"); 
+    } else {
+      const error = [{msg: `Sorry, already a user with the username: ${req.body.username}`}]; 
+      return res.json({error: error});
+    }
+  });
 }
 
 
