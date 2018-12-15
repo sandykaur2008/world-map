@@ -12,7 +12,8 @@ export function arouter() {
     .post(passport.authenticate('local'),
     (req, res) => {
       var userInfo = {
-        username: req.user.username
+        username: req.user.username,
+        csrf: req.csrfToken()
       };
       res.send(userInfo);
     }); 
@@ -20,9 +21,11 @@ export function arouter() {
     .post((req, res) => {
       if (req.user) {
         req.logout();
-        res.send({ msg: 'logging out' }); 
+        res.send({ msg: 'logging out',
+        csrf: req.csrfToken()}); 
       } else {
-        res.send({ msg: 'no user to log out' })
+        res.send({ msg: 'no user to log out',
+        csrf: req.csrfToken()});
       }
     }); 
   return authRouter; 
