@@ -1,5 +1,5 @@
 import React, { Component } from 'react'; 
-import { Redirect } from 'react-router-dom'; 
+import { Redirect, Link } from 'react-router-dom'; 
 import axios from 'axios'; 
 
 class LoginForm extends Component {
@@ -9,7 +9,7 @@ class LoginForm extends Component {
             username: '',
             password: '',
             redirectTo: null,
-            errors: false
+            messages: false
         }; 
         this.handleSubmit = this.handleSubmit.bind(this); 
         this.handleChange = this.handleChange.bind(this); 
@@ -47,20 +47,24 @@ class LoginForm extends Component {
                 }
             }).catch(error => {
                 this.setState({
-                  errors: true
+                  messages: true
                 });                 
             }); 
     }
 
     render() {
-        const errors = this.state.errors;
+        var resetSuccess = this.props.messages;
+        const messages = this.state.messages;
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
               <div className="login"> 
                 <h4>Login</h4>
-                {errors ? (
+                {resetSuccess ? (
+                  resetSuccess.map((message, index) =>
+                  <li key={index}>{message.msg}</li>) ) : (<br></br>)}
+                {messages ? (
                   <strong>Invalid user information</strong>
                 ) : (<br></br>)}
                 <form >
@@ -81,6 +85,9 @@ class LoginForm extends Component {
                     onChange={this.handleChange} />
                   <button onClick={this.handleSubmit} type="submit">Login</button>
                 </form>
+                <Link to="/forgot">
+                <span>Forgot password?</span>
+				      </Link>
               </div> 
             ); 
         }

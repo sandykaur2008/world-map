@@ -37,5 +37,21 @@ export function arouter() {
         res.send({ msg: 'no user to log out' });
       }
     }); 
-  return authRouter; 
+  authRouter.route('/forgot')
+    .post([
+      body('email', 'Invalid Email').not().isEmpty().isEmail().normalizeEmail()
+    ], auth.postForgot); 
+  authRouter.route('/reset/:token')
+  .get(auth.getReset)
+  .post([
+    body('password', 'Password must be at least 5 characters').isLength({ min: 5}).trim().escape()
+        .custom((value, {req, loc, path}) => {
+          if (value !== req.body.password2) {
+            throw new Error('Passwords do not match');
+          } else {
+            return value;
+          }
+        })
+    ], auth.postReset); 
+    return authRouter; 
 } 

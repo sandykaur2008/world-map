@@ -5,6 +5,8 @@ import Register from './components/register';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
 import Home from './components/home'; 
+import Forgot from './components/forgot';
+import Reset from './components/reset'; 
 
 
 class App extends Component {
@@ -12,7 +14,8 @@ class App extends Component {
     super();
     this.state = {
       loggedIn: false, 
-      username: null
+      username: null,
+      messages: null 
     }; 
 
     this.getUser = this.getUser.bind(this); 
@@ -66,7 +69,7 @@ class App extends Component {
           path="/login"
           render={() =>
             <LoginForm
-              updateUser={this.updateUser}
+              updateUser={this.updateUser} messages={this.state.messages}
             />}
         />
         <Route
@@ -74,7 +77,21 @@ class App extends Component {
           render={() =>
             <Register/>}
         />
-
+        <Route
+          path="/forgot"
+          render={() =>
+            <Forgot
+            updateUser={this.updateUser} messages={this.state.messages}
+            />}
+        />
+        <Route
+          path="/reset/:token"
+          render={() =>
+            <Reset
+            updateUser={this.updateUser} 
+            />}
+        />
+      
       </div>
     );
   }
