@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'; 
-import {Route, Link} from 'react-router-dom'; 
+import {Route} from 'react-router-dom'; 
 import Register from './components/register';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
-import Home from './components/home'; 
+import Map from './components/map'; 
 import Forgot from './components/forgot';
 import Reset from './components/reset'; 
+import Home from './components/home'; 
 
 
 class App extends Component {
@@ -15,7 +16,8 @@ class App extends Component {
     this.state = {
       loggedIn: false, 
       username: null,
-      messages: null 
+      messages: null,
+      map: null
     }; 
 
     this.getUser = this.getUser.bind(this); 
@@ -40,13 +42,15 @@ class App extends Component {
 
         this.setState({
           loggedIn: true,
-          username: response.data.user.username
+          username: response.data.user.username,
+          map: 'map'
         }); 
       } else {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          username: null
+          username: null,
+          map: null
         }); 
       }
     }); 
@@ -72,6 +76,14 @@ class App extends Component {
               updateUser={this.updateUser} messages={this.state.messages}
             />}
         />
+        {this.state.loggedIn &&
+        <Route
+          exact path="/map"
+          render={() =>
+            <Map
+            updateUser={this.updateUser} loggedIn={this.state.loggedIn} map={this.state.map}
+            />}
+         />}
         <Route
           path="/register"
           render={() =>

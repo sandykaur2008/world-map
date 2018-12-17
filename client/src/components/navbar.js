@@ -1,11 +1,13 @@
 import React, { Component } from 'react'; 
-import { Redirect } from 'react-router-dom'; 
-import { Route, Link } from 'react-router-dom'; 
+import { Link } from 'react-router-dom'; 
 import axios from 'axios'; 
 
 class Navbar extends Component {
     constructor() {
         super(); 
+        this.state = {
+          redirectTo: null
+        }; 
         this.logout = this.logout.bind(this); 
     }
 
