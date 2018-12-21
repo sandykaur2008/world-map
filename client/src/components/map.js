@@ -1,5 +1,6 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
+import axios from 'axios'; 
 
 class MyMap extends Component {
   constructor() {
@@ -8,9 +9,21 @@ class MyMap extends Component {
       markers: []
     };
   this.addMarker = this.addMarker.bind(this);  
+  this.clearMarker = this.clearMarker.bind(this);
+  this.handleClick = this.handleClick.bind(this); 
   }
   
-
+  componentDidMount() {
+    axios.get('/map/', {withCredentials: true}).then(response => {
+      if (response.data.markers) {
+        this.setState({
+          markers: response.data.markers
+        }); 
+      } else {
+        console.log("no markers"); 
+      }
+    });
+  }
 
   addMarker(e) {
     const {markers} = this.state;
@@ -28,9 +41,29 @@ class MyMap extends Component {
     }
   }
    
+  handleClick() {
+    axios
+      .post('/map/', {
+        markers: this.state.markers
+      }, {withCredentials: true}) 
+      .then((response) => {
+        if (response.data.markers) {
+          console.log("react post data" + response.data.markers); 
+          this.setState({
+            markers: response.data.markers
+          }); 
+        } else {
+          console.log("react no post data"); 
+          this.setState({
+            markers: []
+          }); 
+        }
+      }); 
+  }
     
   render() {
     return (
+      <div>
       <Map 
         center={[51.505, -0.09]} 
         onClick={this.addMarker}
@@ -51,6 +84,7 @@ class MyMap extends Component {
         </Marker>
           )}
         </Map>
+        <button onClick={this.handleClick}>Save</button></div>
       );
     }
   }

@@ -9,8 +9,8 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: false, required: false},
   password: { type: String, unique: false, required: false },
   resetToken: { type: String, unique: false, required: false },
-  expires: { type: Date, unique: false, required: false }
-
+  expires: { type: Date, unique: false, required: false },
+  markers: { type: Array, unique: false, required: false}
 }); 
 
 // Define schema methods

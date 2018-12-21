@@ -10,6 +10,8 @@ import helmet from 'helmet';
 const app = express();
 import {arouter} from './routes/authRoutes'; 
 const authRouter = arouter(); 
+import {mrouter} from './routes/mapRoutes';
+const mapRouter = mrouter(); 
 const port = process.env.PORT || 5000;
 import mongoose from 'mongoose';
 mongoose.Promise = global.Promise; 
@@ -35,5 +37,6 @@ app.use((req, res, next) => {
 });
 app.use(helmet()); 
 app.use('/auth', authRouter); 
+app.use('/map', mapRouter); 
 
 app.listen(port, () => console.log(`Listening on port ${port}`));
