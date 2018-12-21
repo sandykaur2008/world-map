@@ -24,3 +24,4 @@ venv/
 worldmap.code-workspace
 .env 
 server-dest/
+.vscode

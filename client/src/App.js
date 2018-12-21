@@ -4,7 +4,7 @@ import {Route} from 'react-router-dom';
 import Register from './components/register';
 import LoginForm from './components/login-form';
 import Navbar from './components/navbar';
-import Map from './components/map'; 
+import MyMap from './components/map'; 
 import Forgot from './components/forgot';
 import Reset from './components/reset'; 
 import Home from './components/home'; 
@@ -24,6 +24,8 @@ class App extends Component {
     this.componentDidMount = this.componentDidMount.bind(this); 
     this.updateUser = this.updateUser.bind(this); 
   }
+
+
 
   componentDidMount() {
     this.getUser(); 
@@ -80,8 +82,8 @@ class App extends Component {
         <Route
           exact path="/map"
           render={() =>
-            <Map
-            updateUser={this.updateUser} loggedIn={this.state.loggedIn} map={this.state.map}
+            <MyMap
+            loggedIn={this.state.loggedIn} map={this.state.map}
             />}
          />}
         <Route
