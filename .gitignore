@@ -25,3 +25,4 @@ worldmap.code-workspace
 .env 
 server-dest/
 .vscode
+client/src/components/search.js

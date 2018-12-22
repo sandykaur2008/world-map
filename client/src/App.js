@@ -17,9 +17,9 @@ class App extends Component {
       loggedIn: false, 
       username: null,
       messages: null,
-      map: null
+      map: null, 
     }; 
-
+    this.mapRef = React.createRef(); 
     this.getUser = this.getUser.bind(this); 
     this.componentDidMount = this.componentDidMount.bind(this); 
     this.updateUser = this.updateUser.bind(this); 
@@ -63,11 +63,7 @@ class App extends Component {
       <div className="App">
    
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-        {/* greet user if logged in: */}
-        {this.state.loggedIn &&
-          <p>Join the party, {this.state.username}!</p>
-        }
-        {/* Routes to different components */}
+        <a href="#" id="searchbar"></a>
         <Route
           exact path="/"
           component={Home} />
@@ -83,7 +79,7 @@ class App extends Component {
           exact path="/map"
           render={() =>
             <MyMap
-            loggedIn={this.state.loggedIn} map={this.state.map}
+            loggedIn={this.state.loggedIn} map={this.state.map} center={{ lat: 51.505, lng: -0.09 }} zoom={13} ref={this.mapRef}
             />}
          />}
         <Route

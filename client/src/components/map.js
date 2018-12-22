@@ -1,6 +1,7 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
 import axios from 'axios'; 
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
 class MyMap extends Component {
   constructor() {
@@ -8,12 +9,20 @@ class MyMap extends Component {
     this.state = {
       markers: []
     };
+  this.mapRef = React.createRef();
   this.addMarker = this.addMarker.bind(this);  
   this.clearMarker = this.clearMarker.bind(this);
   this.handleClick = this.handleClick.bind(this); 
   }
-  
+
  componentDidMount() {
+   const map = this.mapRef.current.leafletElement; 
+   const provider = new OpenStreetMapProvider(); 
+   const searchControl = new GeoSearchControl({
+    provider: provider,
+    style: 'bar'
+  });
+  map.addControl(searchControl); 
    axios.get('/map/', {withCredentials: true}).then(response => {
      if (response.data.markers) {
        this.setState({
@@ -27,6 +36,7 @@ class MyMap extends Component {
 
   addMarker(e) {
     const {markers} = this.state;
+    console.log(e); 
     markers.push({
       lat: e.latlng.lat, 
       lng: e.latlng.lng
@@ -71,9 +81,10 @@ class MyMap extends Component {
     return (
       <div>
       <Map 
-        center={[51.505, -0.09]} 
+        center={this.props.center}
+        zoom={this.props.zoom} 
+        ref={this.mapRef}
         onClick={this.addMarker}
-        zoom={13} 
       >
       <TileLayer
           attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
@@ -81,7 +92,7 @@ class MyMap extends Component {
           maxZoom="18"
           id='mapbox.streets'
           accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ"
-      />
+          />
         {this.state.markers.map((position, idx) => 
           <Marker key={`marker-${idx}`} position={position}>
           <Popup position={position}>
