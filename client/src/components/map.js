@@ -13,22 +13,25 @@ class MyMap extends Component {
   this.handleClick = this.handleClick.bind(this); 
   }
   
-  componentDidMount() {
-    axios.get('/map/', {withCredentials: true}).then(response => {
-      if (response.data.markers) {
-        this.setState({
-          markers: response.data.markers
-        }); 
+ componentDidMount() {
+   axios.get('/map/', {withCredentials: true}).then(response => {
+     if (response.data.markers) {
+       this.setState({
+        markers: response.data.markers
+      }); 
       } else {
-        console.log("no markers"); 
+      console.log("no markers"); 
       }
     });
   }
 
   addMarker(e) {
     const {markers} = this.state;
-    markers.push(e.latlng); 
-    window.console.log("markers" + markers); 
+    markers.push({
+      lat: e.latlng.lat, 
+      lng: e.latlng.lng
+    }); 
+    console.log(markers); 
     this.setState({markers: markers}); 
   }
 
@@ -37,14 +40,17 @@ class MyMap extends Component {
     const index = markers.indexOf(position);
     if (index > -1) {
       markers.splice(index, 1);
+      console.log(markers); 
       this.setState({markers: markers}); 
     }
   }
    
   handleClick() {
+    const {markers} = this.state;
+    console.log(markers); 
     axios
       .post('/map/', {
-        markers: this.state.markers
+        savedMarkers: markers
       }, {withCredentials: true}) 
       .then((response) => {
         if (response.data.markers) {

@@ -14,13 +14,14 @@ export async function getMarkers({username}) {
   }
 }
 
-export async function saveMarkers({username, markers}) {
+export async function saveMarkers({username}, {savedMarkers}) {
+  console.log("before map config" + savedMarkers); 
   try {
-    const user = await User.updateOne(
-      { username: username},
+    const user = await User.findOneAndUpdate({ username: username},
       {
-        $set: {markers: markers}
-      }
+        $set: {markers: savedMarkers}
+      },
+      { new: true}
     ); 
     console.log("inside map config" + user.markers); 
     return user.markers; 

@@ -14,7 +14,8 @@ export function getMap(req, res) {
 }
 
 export function postMap(req, res) {
-  mapConfig.saveMarkers(req.user, req.data).then((markers) => {
+  console.log("body in controller" + req.body.savedMarkers); 
+  mapConfig.saveMarkers(req.user, req.body).then((markers) => {
     if (!Array.isArray(markers) || !markers.length) {
       console.log("posting no markers:" + markers); 
       return res.send ('no posting markers'); 

@@ -2,7 +2,7 @@
   "name": "world-map",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"node server-dest/server.js\" \"cd client && npm start\"",
+    "start": "concurrently \"nodemon server-dest/server.js\" \"cd client && npm start\"",
     "build:js": "babel server-src -d server-dest --presets env"
   },
   "dependencies": {
