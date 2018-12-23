@@ -36,8 +36,13 @@ class Navbar extends Component {
         <header>
           {loggedIn ? (
             <section>
+              <Link to="/">
+              <span>Home</span>
+              </Link>
               <Link to="#" onClick={this.logout}>
-              <span>logout</span></Link>
+              <span>Logout</span></Link>
+              <Link to="/map">
+              <span>Map</span></Link>
             </section>
           ) : (
             <section>

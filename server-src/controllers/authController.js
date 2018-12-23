@@ -19,11 +19,13 @@ export function postRegister(req, res) {
     return res.json({message: message});
     } 
   auth.addUser(req.body).then((results) => {
+    console.log("results:" + results); 
     if (results) {
-      return res.send("success"); 
+      const message = [{msg: 'Thank you for signing up, please login!'}]; 
+      return res.json({message: message, status: 1}); 
     } else {
       const message = [{msg: `Sorry, already a user with the username: ${req.body.username}`}]; 
-      return res.json({message: message});
+      return res.json({message: message, status: 0});
     }
   });
 }

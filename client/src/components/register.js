@@ -15,7 +15,9 @@ class Register extends Component {
 		}; 
 		this.handleSubmit = this.handleSubmit.bind(this); 
 		this.handleChange = this.handleChange.bind(this); 
-	}
+  }
+  
+  
 	handleChange(event) {
 		this.setState({
 			[event.target.name]: event.target.value
@@ -34,15 +36,14 @@ class Register extends Component {
 		}, {withCredentials: true})
 			.then(response => {
         console.log(response);
-				if (!response.data.message) {
-					console.log('successful signup'); 
+				if (response.data.status === 1) {
+          console.log('successful signup'); 
 					this.setState({ //redirect to login page
             redirectTo: '/login'
 					}); 
 				} else { this.setState({
           messages: response.data.message
         }); 
-        console.log(this.state.messages);
         }
 			});
 	}
@@ -56,9 +57,10 @@ class Register extends Component {
 	  return (
 		 <div className="SignupForm">
 			 <h4>Sign up</h4>
+       <p>Upon successful signup, you will be redirected to login page.</p>
        {messages ? (
          messages.map((message, index) =>
-         <li key={index}>{message.msg}</li>) ) : (<br></br>)}
+         <li key={index}>{message.msg}</li>) ) : null }
 			 <form>
 				 <label className="form-label" htmlFor="username">Username</label>
 				 <input className="form-input"

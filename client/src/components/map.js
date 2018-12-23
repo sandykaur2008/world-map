@@ -1,7 +1,7 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
 import axios from 'axios'; 
-import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
+import Search from './search'; 
 
 class MyMap extends Component {
   constructor() {
@@ -16,13 +16,6 @@ class MyMap extends Component {
   }
 
  componentDidMount() {
-   const map = this.mapRef.current.leafletElement; 
-   const provider = new OpenStreetMapProvider(); 
-   const searchControl = new GeoSearchControl({
-    provider: provider,
-    style: 'bar'
-  });
-  map.addControl(searchControl); 
    axios.get('/map/', {withCredentials: true}).then(response => {
      if (response.data.markers) {
        this.setState({
@@ -36,7 +29,7 @@ class MyMap extends Component {
 
   addMarker(e) {
     const {markers} = this.state;
-    console.log(e); 
+    console.log(e.target); 
     markers.push({
       lat: e.latlng.lat, 
       lng: e.latlng.lng
@@ -83,7 +76,7 @@ class MyMap extends Component {
       <Map 
         center={this.props.center}
         zoom={this.props.zoom} 
-        ref={this.mapRef}
+        ref={c => this.mapRef = c}
         onClick={this.addMarker}
       >
       <TileLayer
@@ -100,6 +93,7 @@ class MyMap extends Component {
             </Popup>
         </Marker>
           )}
+          {/* <Search map={this.mapRef}/> */}
         </Map>
         <button onClick={this.handleClick}>Save</button></div>
       );

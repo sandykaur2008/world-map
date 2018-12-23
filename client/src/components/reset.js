@@ -22,9 +22,6 @@ class Reset extends Component {
       console.log("token" + token); 
       axios.get(`/auth/reset/${token}`, {withCredentials: true}).then(response => {
         if (response.data.status === 0) {
-          this.props.updateUser({
-            messages: response.data.message
-          }); 
           this.setState({
             redirectTo: '/forgot',
           });
@@ -53,16 +50,10 @@ class Reset extends Component {
             }, {withCredentials: true})
             .then(response => {
               if (response.data.status === 1) {
-                this.props.updateUser({
-                  messages: response.data.message
-                }); 
                 this.setState({
                   redirectTo: '/login',
                 }); 
               } else if (response.data.status === 0) {
-                this.props.updateUser({
-                  messages: response.data.message
-                }); 
                 this.setState({
                   redirectTo: '/forgot',
                 }); 
@@ -86,9 +77,10 @@ class Reset extends Component {
             return (
               <div className="reset"> 
                 <h4>Reset</h4>
+                <p>Upon successful reset, you will be redirected to login page.</p>
                 {messages ? (
                   messages.map((message, index) =>
-                  <li key={index}>{message.msg}</li>) ) : (<br></br>)}
+                  <li key={index}>{message.msg}</li>) ) : null}
                 <form >
                   <label className="form-label" htmlFor="password">Password: </label>
 				          <input className="form-input"

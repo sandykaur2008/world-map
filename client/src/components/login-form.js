@@ -53,7 +53,6 @@ class LoginForm extends Component {
     }
 
     render() {
-        var resetSuccess = this.props.messages;
         const messages = this.state.messages;
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
@@ -61,12 +60,9 @@ class LoginForm extends Component {
             return (
               <div className="login"> 
                 <h4>Login</h4>
-                {resetSuccess ? (
-                  resetSuccess.map((message, index) =>
-                  <li key={index}>{message.msg}</li>) ) : (<br></br>)}
                 {messages ? (
                   <strong>Invalid user information</strong>
-                ) : (<br></br>)}
+                ) : null }
                 <form >
                   <label className="form-label" htmlFor="username">Username</label>
                   <input className="form-input"

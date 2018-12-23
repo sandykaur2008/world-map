@@ -1,4 +1,4 @@
-import React, { Component } from 'react'; 
+import React, { Component, getDerivedStateFromProps } from 'react'; 
 import { Redirect } from 'react-router-dom'; 
 import axios from 'axios'; 
 
@@ -13,6 +13,7 @@ class Forgot extends Component {
         this.handleChange = this.handleChange.bind(this); 
   
     }
+
 
     handleChange(event) {
         this.setState({
@@ -45,7 +46,6 @@ class Forgot extends Component {
     }
 
     render() {
-        const resetError = this.props.messages;
         const messages = this.state.messages;
         if (this.state.redirectTo) {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
@@ -53,14 +53,12 @@ class Forgot extends Component {
             return (
               <div className="forgot"> 
                 <h4>Forgot</h4>
-                {resetError ? (
-                  resetError.map((message, index) =>
-                  <li key={index}>{message.msg}</li>) ) : (<br></br>)}
+                <p>If you already requested a reset and were redirected here, your reset link has expired. Please request another one below.</p>
                 {messages ? (
                   messages.map((message, index) =>
-                  <li key={index}>{message.msg}</li>) ) : (<br></br>)}
+                  <li key={index}>{message.msg}</li>) ) : null }
                 <form >
-                  <label className="form-label" htmlFor="username">Email</label>
+                  <label className="form-label" htmlFor="email">Email</label>
                   <input className="form-input"
                     type="text"
                     id="email"
