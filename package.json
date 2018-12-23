@@ -2,7 +2,8 @@
   "name": "world-map",
   "version": "1.0.0",
   "scripts": {
-    "start": "concurrently \"node server-dest/server.js\" \"cd client && npm start\"",
+    "start": "node server-dest/server.js",
+    "heroku-postbuild": "cd client && npm install && npm run build", 
     "build:js": "babel server-src -d server-dest --presets env", 
     "build:testjs": "babel srctest -d desttest --presets env",
     "test": "NODE_ENV=TEST mocha --timeout 150000 desttest/test.js --exit"
