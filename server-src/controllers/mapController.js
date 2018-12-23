@@ -4,11 +4,11 @@ import * as mapConfig from '../config/map';
 export function getMap(req, res) {
   mapConfig.getMarkers(req.user).then((markers) => {
     if (!Array.isArray(markers) || !markers.length) {
-      console.log("no markers:" + markers); 
-      return res.send ('no markers'); 
+      console.log("no markers:" + markers + process.env.REACT_APP_MAP_TOKEN); 
+      return res.json({accessCode: process.env.REACT_APP_MAP_TOKEN}); 
     } else {
-      console.log("success:" + markers);
-      return res.json({markers: markers}); 
+      console.log("success:" + markers + process.env.REACT_APP_MAP_TOKEN);
+      return res.json({markers: markers, accessCode: process.env.REACT_APP_MAP_TOKEN}); 
     }
   });
 }

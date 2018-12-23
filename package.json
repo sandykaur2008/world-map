@@ -31,7 +31,9 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-flash-message": "^1.0.2",
+    "react-geolocated": "^2.4.0",
     "react-leaflet": "^2.1.3",
+    "react-leaflet-search": "^0.6.0",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1"
   },

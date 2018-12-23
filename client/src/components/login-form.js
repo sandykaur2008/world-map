@@ -54,36 +54,52 @@ class LoginForm extends Component {
 
     render() {
         const messages = this.state.messages;
-        if (this.state.redirectTo) {
-            return <Redirect to={{ pathname: this.state.redirectTo }} />
+      if (this.state.redirectTo) {
+           return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-              <div className="login"> 
+              <div> 
+                <div class="row">
+                <div class="col-md-12">
                 <h4>Login</h4>
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
                 {messages ? (
-                  <strong>Invalid user information</strong>
+                  <p><strong>Invalid user information</strong></p>
                 ) : null }
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
                 <form >
-                  <label className="form-label" htmlFor="username">Username</label>
-                  <input className="form-input"
+                  <p><input className="form-input"
                     type="text"
                     id="username"
                     name="username"
                     placeholder="Username"
                     value={this.state.username}
-                    onChange={this.handleChange} />
-                  <label className="form-label" htmlFor="password">Password: </label>
-                  <input className="form-input"
-                    placeholder="password"
+                    onChange={this.handleChange} /></p>
+                  <label className="form-label" htmlFor="username">Username</label>
+                  <p><input className="form-input"
+                    placeholder="Password"
                     type="password"
                     name="password"
                     value={this.state.password}
-                    onChange={this.handleChange} />
-                  <button onClick={this.handleSubmit} type="submit">Login</button>
+                    onChange={this.handleChange} /></p>
+                  <label className="form-label" htmlFor="password">Password</label>                    
+                  <p><button onClick={this.handleSubmit} type="submit">Login</button></p>
                 </form>
-                <Link to="/forgot">
+                </div>
+                </div>
+                <div class="row">
+                <div class="col-md-12">
+                <Link class="App-link" to="/forgot">
                 <span>Forgot password?</span>
 				      </Link>
+              </div>
+              </div> 
               </div> 
             ); 
         }

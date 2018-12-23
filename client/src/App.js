@@ -9,7 +9,7 @@ import Forgot from './components/forgot';
 import Reset from './components/reset'; 
 import Home from './components/home'; 
 import NoMatch from './components/nomatch'; 
-
+import './App.css';
 
 class App extends Component {
   constructor() {
@@ -20,13 +20,11 @@ class App extends Component {
       messages: null,
       map: null, 
     }; 
-    this.mapRef = React.createRef(); 
+    this.mapRef = React.createRef();
     this.getUser = this.getUser.bind(this); 
     this.componentDidMount = this.componentDidMount.bind(this); 
     this.updateUser = this.updateUser.bind(this); 
   }
-
-
 
   componentDidMount() {
     this.getUser(); 
@@ -61,15 +59,12 @@ class App extends Component {
 
   render() {
     return (
-      <div className="App">
-   
+      <div>
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
       <Switch>
         <Route
           exact path="/"
-          render={() => 
-            <Home/>
-          }
+          component={Home}
            />
         <Route
           exact path="/login"
@@ -78,12 +73,12 @@ class App extends Component {
            ( <LoginForm
               updateUser={this.updateUser}  /> ) }
         />
-                <Route
-               exact path="/map"
+            <Route
+               exact path="/map/"
                 render={() =>
                   this.state.loggedIn ? (
                   <MyMap
-                  loggedIn={this.state.loggedIn} map={this.state.map} center={{ lat: 51.505, lng: -0.09 }} zoom={13} ref={this.mapRef}
+                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef}
                   /> ) : ( <Redirect to='/'/> ) }
                /> 
 

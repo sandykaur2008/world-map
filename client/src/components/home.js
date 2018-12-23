@@ -1,4 +1,3 @@
-'use strict'; 
 import React, { Component } from 'react';  
 import axios from 'axios'; 
 
@@ -51,34 +50,49 @@ handleSubmit(event) {
     const messages = this.state.messages; 
     return (
       <div>
+        <div class="row">
+        <div class="col-md-12">
         <p>Welcome to Sandy's Mapsite, where you can pin and save locations on a map of the world! Please 
           register and sign-in to access. If you have questions/comments, please submit below.</p>
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
         {messages ? (
          messages.map((message, index) =>
-         <li key={index}>{message.msg}</li>) ) : null}
+         <p key={index}><strong>{message.msg}</strong></p>) ) : null}
+         </div>
+         </div> 
+         <div class="row">
+         <div class="col-md-12">
         <form >
-          <label className="form-label" htmlFor="comments">Questions/Comments: </label>
-          <textarea 
+          <p><textarea 
+          rows="10" cols="30"
           name="comments"
             value={this.state.comments}
-            onChange={this.handleChange}/>
-          <label className="form-label" htmlFor="name">Name: </label>
-            <input className="form-input"
+            placeholder="Questions/Comments"
+            onChange={this.handleChange}/></p>
+          <label className="form-label" htmlFor="comments">Questions/Comments</label>
+          <p><input className="form-input"
+              placeholder="Name"
               name="name"
               value={this.state.name}
-              onChange={this.handleChange} />
-          <label className="form-label" htmlFor="email">Email: </label>
-            <input className="form-input"
+              onChange={this.handleChange} /></p>
+          <label className="form-label" htmlFor="name">Name</label>
+          <p><input className="form-input"
+              placeholder="Email"
               type="text"
               id="email"
               name="email"
               value={this.state.email}
-              onChange={this.handleChange} />
-          <button onClick={this.handleSubmit} type="submit">Submit</button>
-        </form>      
+              onChange={this.handleChange} /></p>
+          <label className="form-label" htmlFor="email">Email</label>
+          <p><button onClick={this.handleSubmit} type="submit">Submit</button></p>
+        </form>    
+        </div>
+        </div>  
       </div>
-    ); 
-  }
+    ); }
 }
 
 export default Home; 

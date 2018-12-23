@@ -1,7 +1,6 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
-import axios from 'axios'; 
-import Search from './search'; 
+import axios from 'axios';  
 
 class MyMap extends Component {
   constructor() {
@@ -72,30 +71,41 @@ class MyMap extends Component {
     
   render() {
     return (
-      <div>
-      <Map 
-        center={this.props.center}
-        zoom={this.props.zoom} 
-        ref={c => this.mapRef = c}
-        onClick={this.addMarker}
-      >
+  <div>
+    <Map 
+      center={this.props.center}
+      zoom={this.props.zoom} 
+      ref={this.mapRef}
+      onClick={this.addMarker}
+    >
       <TileLayer
-          attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-          url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
-          maxZoom="18"
-          id='mapbox.streets'
-          accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ"
-          />
-        {this.state.markers.map((position, idx) => 
-          <Marker key={`marker-${idx}`} position={position}>
+        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+        url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
+        maxZoom="18"
+        id='mapbox.streets'
+        accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ"
+      />
+      {this.state.markers.map((position, idx) => 
+        <Marker key={`marker-${idx}`} position={position}>
           <Popup position={position}>
             <button onClick={(e) => this.clearMarker(position)}>Delete</button>
-            </Popup>
+          </Popup>
         </Marker>
-          )}
-          {/* <Search map={this.mapRef}/> */}
-        </Map>
-        <button onClick={this.handleClick}>Save</button></div>
+      )}
+      {/*<ReactLeafletSearch 
+        position='topleft'
+        showMarker={true}
+        showPopup={false}
+        closeResultsOnClick={true}
+      openSearchOnLoad={true} />*/}
+        {/* <Search map={this.mapRef}/> */}
+    </Map>
+    <div class="row">
+    <div class="col-md-12"><br></br>
+    <p><button onClick={this.handleClick}>Save</button></p>
+    </div>
+    </div>
+  </div>
       );
     }
   }

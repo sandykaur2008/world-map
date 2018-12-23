@@ -33,30 +33,33 @@ class Navbar extends Component {
         console.log(this.props);
         
         return (
-        <header>
+        <header class="App-header">
+          <div class="container"> 
           {loggedIn ? (
             <section>
-              <Link to="/">
-              <span>Home</span>
+              <Link class="App-link" to="/" >
+              <span >Home</span>
               </Link>
-              <Link to="#" onClick={this.logout}>
+              <Link class="App-link" to="#" onClick={this.logout}>
               <span>Logout</span></Link>
-              <Link to="/map">
+              <Link class="App-link" to="/map">
               <span>Map</span></Link>
             </section>
           ) : (
             <section>
-              <Link to="/">
-                <span>home</span>
+              <Link class="App-link" to="/">
+                <span>Home</span>
               </Link>
-              <Link to="/login">
-                <span>login</span>
+              <Link class="App-link" to="/login">
+                <span>Login</span>
 				      </Link>
-              <Link to="/register">
+              <Link class="App-link" to="/register">
               <span>Register</span>
 				      </Link>
             </section>
           )}
+          </div>
+          <br></br>
         </header>
         );
     }

@@ -55,45 +55,61 @@ class Register extends Component {
       return <Redirect to={{ pathname: this.state.redirectTo }} />
     } else {
 	  return (
-		 <div className="SignupForm">
+		 <div>
+       <div class="row">
+       <div class="col-md-12">
 			 <h4>Sign up</h4>
+       </div>
+       </div> 
+       <div class="row">
+       <div class="col-md-12">
        <p>Upon successful signup, you will be redirected to login page.</p>
+       </div>
+       </div>
+       <div class="row">
+       <div class="col-md-12">
        {messages ? (
          messages.map((message, index) =>
-         <li key={index}>{message.msg}</li>) ) : null }
+         <p key={index}><strong>{message.msg}</strong></p>) ) : null }
+        </div>
+        </div>
+        <div class="row">
+        <div class="col-md-12">
 			 <form>
-				 <label className="form-label" htmlFor="username">Username</label>
-				 <input className="form-input"
+				 <p><input className="form-input"
 					 type="text"
 					 id="username"
 					 name="username"
 					 placeholder="Username"
 					 value={this.state.username}
-					 onChange={this.handleChange} />
-         <label className="form-label" htmlFor="email">Email</label>
-				 <input className="form-input"
+					 onChange={this.handleChange} /></p>
+         <label className="form-label" htmlFor="username">Username</label>
+				<p><input className="form-input"
 					 type="text"
 					 id="email"
 					 name="email"
 					 placeholder="Email"
 					 value={this.state.email}
-					 onChange={this.handleChange} />
-				 <label className="form-label" htmlFor="password">Password: </label>
-				 <input className="form-input"
-					  placeholder="password"
+					 onChange={this.handleChange} /></p>
+         <label className="form-label" htmlFor="email">Email</label>           
+				 <p><input className="form-input"
+					  placeholder="Password"
 					  type="password"
 					  name="password"
 					  value={this.state.password}
-					  onChange={this.handleChange} />
-         <label className="form-label" htmlFor="password2">Confirm Password: </label>
-         <input className="form-input"
-            placeholder="password"
+					  onChange={this.handleChange} /></p>
+				 <label className="form-label" htmlFor="password">Password</label>            
+        <p><input className="form-input"
+            placeholder="Confirm Password"
             type="password"
             name="password2"
             value={this.state.password2}
-            onChange={this.handleChange} />
-				 <button onClick={this.handleSubmit} type="submit">Sign up</button>
+            onChange={this.handleChange} /></p>
+         <label className="form-label" htmlFor="password2">Confirm Password</label>
+				 <p><button onClick={this.handleSubmit} type="submit">Sign up</button></p>
 			 </form>
+       </div>
+       </div>
 		 </div>
    ); 
   }

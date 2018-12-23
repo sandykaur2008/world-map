@@ -1,4 +1,4 @@
-import React, { Component, getDerivedStateFromProps } from 'react'; 
+import React, { Component } from 'react'; 
 import { Redirect } from 'react-router-dom'; 
 import axios from 'axios'; 
 
@@ -51,23 +51,39 @@ class Forgot extends Component {
             return <Redirect to={{ pathname: this.state.redirectTo }} />
         } else {
             return (
-              <div className="forgot"> 
-                <h4>Forgot</h4>
+              <div>
+                <div class="row"> 
+                  <div class="col-md-12">
+                  <h4>Forgot</h4>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-md-12">
                 <p>If you already requested a reset and were redirected here, your reset link has expired. Please request another one below.</p>
+                </div> 
+                </div>
+                <div class="row">
+                <div class="col-md-12">
                 {messages ? (
                   messages.map((message, index) =>
-                  <li key={index}>{message.msg}</li>) ) : null }
+                  <p key={index}><strong>{message.msg}</strong></p>) ) : null }
+                </div>
+                </div> 
+                <div class="row">
+                <div class="col-md-12">
                 <form >
-                  <label className="form-label" htmlFor="email">Email</label>
-                  <input className="form-input"
+                 <p><input className="form-input"
                     type="text"
                     id="email"
                     name="email"
                     placeholder="Email"
                     value={this.state.email}
-                    onChange={this.handleChange} />
-                  <button onClick={this.handleSubmit} type="submit">Submit</button>
+                    onChange={this.handleChange} /></p>
+                  <label className="form-label" htmlFor="email">Email</label>
+                  <p><button onClick={this.handleSubmit} type="submit">Submit</button></p>
                 </form>
+                </div>
+                </div>
               </div> 
             ); 
         }
