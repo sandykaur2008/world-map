@@ -25,7 +25,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 })); 
-app.use(csrf()); 
+app.use(
+  process.env.NODE_ENV === 'TEST' ?
+  csrf({ ignoreMethods: ['GET', 'POST']}): 
+  csrf()
+); 
 import {dbConnection} from './database'; 
 dbConnection(); 
 
@@ -42,4 +46,4 @@ app.use('/auth', authRouter);
 app.use('/map', mapRouter); 
 app.use('/contact', contactRouter); 
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+export const server = app.listen(port, () => console.log(`Listening on port ${port}`));
