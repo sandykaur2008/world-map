@@ -40,7 +40,7 @@
     "react-scripts": "^2.1.1"
   },
   "scripts": {
-    "start": "node index.js",
+    "start": "node server-src/server.js",
     "build:js": "babel server-src -d server-dest --presets env",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "build:testjs": "babel srctest -d desttest --presets env",
