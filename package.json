@@ -41,7 +41,7 @@
   },
   "scripts": {
     "start": "node server-dest/server.js",
-    "build:js": "babel server-src -d server-dest --presets env",
+    "postinstall": "babel server-src -d server-dest --presets env",
     "heroku-postbuild": "cd client && npm install && npm run build",
     "build:testjs": "babel srctest -d desttest --presets env",
     "test": "NODE_ENV=TEST mocha --timeout 150000 desttest/test.js --exit"
