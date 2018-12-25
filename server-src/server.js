@@ -9,7 +9,7 @@ app.use(express.static(path.join(__dirname, '../client/build')));
 // Put all API endpoints under '/api'
 app.get('/api/passwords', (req, res) => {
   // Return them as json
-  res.json({message: "hello"});
+  res.json({message: "now in server-src folder"});
 });
 
 // The "catchall" handler: for any request that doesn't
