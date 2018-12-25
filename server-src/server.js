@@ -41,7 +41,5 @@ app.get('*', (req, res) => {
 app.use('/auth', authRouter); 
 app.use('/map', mapRouter); 
 app.use('/contact', contactRouter); 
-const port = process.env.PORT || 5000;
-export const server = app.listen(port);
 
-console.log(`Password generator listening on ${port}`);
+export const server = app.listen(port, () => console.log(`Listening on port ${port}`));
