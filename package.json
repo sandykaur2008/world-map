@@ -42,7 +42,7 @@
   "scripts": {
     "start": "node index.js",
     "build:js": "babel server-src -d server-dest --presets env",
-    "heroku-postbuild": "babel server-src -d server-dest --presets env && cd client && npm install && npm run build",
+    "heroku-postbuild": "cd client && npm install && npm run build",
     "build:testjs": "babel srctest -d desttest --presets env",
     "test": "NODE_ENV=TEST mocha --timeout 150000 desttest/test.js --exit"
   }
