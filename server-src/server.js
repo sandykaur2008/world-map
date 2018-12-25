@@ -15,7 +15,9 @@ const mapRouter = mrouter();
 import {crouter} from './routes/contactRoutes';
 const contactRouter = crouter(); 
 const port = process.env.PORT || 5000;
+import mongoose from 'mongoose';
 import path from 'path'; 
+mongoose.Promise = global.Promise; 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
@@ -29,6 +31,17 @@ app.use(
   csrf({ ignoreMethods: ['GET', 'POST']}): 
   csrf()
 ); 
+import {dbConnection} from './database'; 
+dbConnection(); 
+
+import {passportConfig} from './passport';
+passportConfig(app);  
+app.use((req, res, next) => {
+  let token = req.csrfToken();
+  res.cookie('XSRF-TOKEN', token);
+  console.log(token); 
+  next();
+});
 app.use(helmet()); 
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
