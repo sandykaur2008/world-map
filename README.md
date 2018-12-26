@@ -1,30 +1,44 @@
-# Rando
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-A password generator built with React and Express.
+## Available Scripts
 
-This is a minimal demo of using Create React App to bootstrap a React project, connect the React app to an Express backend, and deploy the whole thing to Heroku.
+In the project directory, you can run:
 
-Read the blog post: [Create React App with Express in
-Production](https://daveceddia.com/create-react-app-express-production/)
+### `npm start`
 
-## Prerequisites
+Runs the app in the development mode.<br>
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-You need to [sign up](https://heroku.com/) for a Heroku account if you don't already have one, and install the [Heroku toolbelt](https://devcenter.heroku.com/articles/heroku-cli). (On a Mac with Homebrew, just run `brew install heroku`).
+The page will reload if you make edits.<br>
+You will also see any lint errors in the console.
 
-## Deploy to Heroku
+### `npm test`
 
-To deploy:
+Launches the test runner in the interactive watch mode.<br>
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-1. Clone this repo.
-2. Inside the repo directory, run `heroku create` (requires [Heroku toolbelt](https://devcenter.heroku.com/articles/heroku-cli)).
-3. Run `git push heroku master` to simultaneously deploy the frontend + backend to Heroku.
+### `npm run build`
 
-### Using NPM
+Builds the app for production to the `build` folder.<br>
+It correctly bundles React in production mode and optimizes the build for the best performance.
 
-Check out the `npm` branch if you're not using Yarn:
+The build is minified and the filenames include the hashes.<br>
+Your app is ready to be deployed!
 
-`git checkout npm`
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-And then once on that branch, the deploy command is:
+### `npm run eject`
 
-`git push heroku npm:master`
+**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+
+If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+
+Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+
+You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+
+## Learn More
+
+You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+
+To learn React, check out the [React documentation](https://reactjs.org/).

@@ -3,3 +3,7 @@ node_modules
 /venv
 .env
 server-dest/
+worldmap.code-workspace
+.vscode
+client/src/components/search.js
+desttest
