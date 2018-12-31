@@ -7,14 +7,13 @@ export function postContact(req, res) {
   if (!messages.isEmpty()) {
     const message = messages.array(); 
     return res.json({message: message});
-    } 
+  } 
   const mailOpts = {
     from: req.body.email, 
     to: process.env.MAIL_USERNAME,
     subject: 'Map site message!',
     text: `${req.body.name} (${req.body.email}) says: ${req.body.comments}`
   }; 
-
   mailer().sendMail(mailOpts, (error, info) => {
     if (error) {
       const message = [{msg: 'Error occurred'}];
@@ -22,5 +21,6 @@ export function postContact(req, res) {
     } else {
     const message = [{msg: 'Thank you for your email!'}];
     return res.json({message: message});
-    }});  
+    }
+  });  
 }

@@ -7,9 +7,8 @@ export async function getMarkers({username}) {
   try {
     const user = await User.findOne({ username: username}); 
     return user.markers;
-      } 
-     catch (err) {
-  console.log(err); 
+  } catch (err) {
+    console.log(err); 
   }
 }
 
@@ -23,6 +22,6 @@ export async function saveMarkers({username}, {savedMarkers}) {
     ); 
     return user.markers; 
   } catch (err) {
-  console.log(err); 
+    console.log(err); 
   }
 }

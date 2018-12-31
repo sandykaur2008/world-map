@@ -56,49 +56,36 @@ class App extends Component {
     return (
       <div>
         <Navbar updateUser={this.updateUser} loggedIn={this.state.loggedIn} />
-      <Switch>
-        <Route
-          exact path="/"
-          component={Home}
-           />
-        <Route
-          exact path="/login"
-          render={() =>
-            this.state.loggedIn ? ( <Redirect to='/map' /> ) : 
-           ( <LoginForm
-              updateUser={this.updateUser}  /> ) }
-        />
-            <Route
-               exact path="/map/"
-                render={() =>
-                  this.state.loggedIn ? (
-                  <MyMap
-                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef}
-                  /> ) : ( <Redirect to='/'/> ) }
-               /> 
-
-
-        <Route
-          exact path="/register"
-          render={() =>
-            this.state.loggedIn ? ( <Redirect to='/map' /> ) :
-           ( <Register />)}
-        />
-        <Route
-         exact path="/forgot"
-          render={() =>
-            this.state.loggedIn ? ( <Redirect to='/map' /> ) : 
-           ( <Forgot /> )}
-        />
-        <Route
-         exact path="/reset/:token"
-          render={() =>
-            this.state.loggedIn ? ( <NoMatch/> ) :
-           ( <Reset />)}
-        />
-        <Route component={NoMatch}/>
-      </Switch>
-      
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route
+            exact path="/login"
+            render={() =>
+              this.state.loggedIn ? ( 
+                <Redirect to='/map' /> 
+              ) : ( 
+                <LoginForm updateUser={this.updateUser}  /> ) } />
+          <Route
+            exact path="/map"
+            render={() =>
+              this.state.loggedIn ? (
+                <MyMap
+                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} /> 
+              ) : ( <Redirect to="/"/> ) } /> 
+          <Route
+            exact path="/register"
+            render={() =>
+              this.state.loggedIn ? ( <Redirect to='/map' /> ) : ( <Register />)} />
+          <Route
+            exact path="/forgot"
+            render={() =>
+              this.state.loggedIn ? ( <Redirect to='/map' /> ) : ( <Forgot /> )} />
+          <Route
+            exact path="/reset/:token"
+            render={() =>
+              this.state.loggedIn ? ( <NoMatch/> ) : ( <Reset />)} />
+          <Route component={NoMatch}/>
+        </Switch>
       </div>
     );
   }
