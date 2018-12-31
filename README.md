@@ -1,44 +1,54 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Sandy's Mapsite
+This project is called "Sandy's Mapsite" and it's a place to pin and save locations on a map of the world. I would like for this to eventually become a more useful application (with a search bar and ability to write notes on the pins, etc). It has also been a way for me to practice developing with the MERN (MongoDB, Express, React, Node.js) stack. Frontend has been styled with Bootstrap. Deployed with Heroku at https://sandysmapsite.herokuapp.com/.
 
-## Available Scripts
+# Getting Started
+To contribute:
+- Navigate to this repo: sandykaur2008/world-map
+- Follow these instructions: https://help.github.com/articles/fork-a-repo/
 
-In the project directory, you can run:
+To simply view: 
+- Navigate to this repo: sandykaur2008/world-map
+- Follow these instructions: https://help.github.com/articles/cloning-a-repository/
 
-### `npm start`
+# Prerequisites
+Aside from a working browser, you will also need:
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+- the dependencies in package.json
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+## To install dependencies in package.json
+Make sure you're in root directory of repo and execute:
 
-### `npm test`
+```npm install```
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## To build files via babel
+Make sure you're in root directory of repo and execute:
 
-### `npm run build`
+```npm run postinstall```
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## To get create-react-app build (which will be served by server as static files)
+Make sure you're in root directory of repo and execute:
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+```npm run heroku-postbuild```
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## To actually run website once repo cloned, dependencies installed, appropriate files compiled
+- Navigate to root directory
+- Make sure Mongo server is running (open separate terminal window and type ``` mongod ```)
+- Execute: 
 
-### `npm run eject`
+```npm start```
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+- Navigate to link provided 
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+# Built With
+- Visual Studio Code 1.25.1
+- Node.js 10.14.1
+- See package.json
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+# Authors
+Satinder Kaur 
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+# Acknowledgments
+Thanks, @github/markalexandercastillo, for your help. :relaxed: 
+Also, found https://github.com/dceddia/rando very helpful. 
 
-## Learn More
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
