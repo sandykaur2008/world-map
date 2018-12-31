@@ -39,7 +39,6 @@ passportConfig(app);
 app.use((req, res, next) => {
   let token = req.csrfToken();
   res.cookie('XSRF-TOKEN', token);
-  console.log(token); 
   next();
 });
 app.use(helmet()); 

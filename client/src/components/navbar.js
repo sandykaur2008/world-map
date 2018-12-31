@@ -13,9 +13,7 @@ class Navbar extends Component {
 
     logout(event) {
         event.preventDefault(); 
-        console.log('logging out'); 
         axios.post('/auth/logout', {withCredentials: true}).then(response => {
-          console.log(response.data); 
           if (response.status === 200) {
             this.props.updateUser({
               loggedIn: false,
@@ -23,14 +21,12 @@ class Navbar extends Component {
             }); 
           }
         }).catch(error => {
-            console.log('Logout error'); 
+            console.log(error); 
         }); 
       }
 
     render() {
         const loggedIn = this.props.loggedIn;
-        console.log('navbar render, props: '); 
-        console.log(this.props);
         
         return (
         <header class="App-header">

@@ -19,7 +19,6 @@ class Reset extends Component {
 
     componentDidMount() {
       let token = this.props.match.params.token; 
-      console.log("token" + token); 
       axios.get(`/auth/reset/${token}`, {withCredentials: true}).then(response => {
         if (response.data.status === 0) {
           this.setState({
@@ -41,8 +40,6 @@ class Reset extends Component {
 
     handleSubmit(event) {
         event.preventDefault(); 
-        console.log('handleSubmit'); 
-
         axios
             .post(`/auth/reset/${this.state.resetToken}`, {
                 password: this.state.password,

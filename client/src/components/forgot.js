@@ -14,7 +14,6 @@ class Forgot extends Component {
   
     }
 
-
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -23,15 +22,12 @@ class Forgot extends Component {
 
     handleSubmit(event) {
         event.preventDefault(); 
-        console.log('handleSubmit'); 
-
         axios
             .post('/auth/forgot', {
                 email: this.state.email
             }, {withCredentials: true})
             .then(response => {
                 if (response.status === 200) {
-                    // update App.js state
                     this.setState({
                         messages: response.data.message
                     }); 
@@ -59,7 +55,8 @@ class Forgot extends Component {
               </div>
               <div class="row">
                 <div class="col-md-12">
-                <p>If you already requested a reset and were redirected here, your reset link has expired. Please request another one below.</p>
+                <p>If you already requested a reset and were redirected here, your reset 
+                  link has expired. Please request another one below.</p>
                 </div> 
                 </div>
                 <div class="row">

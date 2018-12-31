@@ -18,7 +18,6 @@ export function postContact(req, res) {
   mailer().sendMail(mailOpts, (error, info) => {
     if (error) {
       const message = [{msg: 'Error occurred'}];
-      console.log(message); 
       return res.json({message: message});
     } else {
     const message = [{msg: 'Thank you for your email!'}];

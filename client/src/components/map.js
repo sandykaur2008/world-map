@@ -20,20 +20,16 @@ class MyMap extends Component {
        this.setState({
         markers: response.data.markers
       }); 
-      } else {
-      console.log("no markers"); 
-      }
+      } 
     });
   }
 
   addMarker(e) {
     const {markers} = this.state;
-    console.log(e.target); 
     markers.push({
       lat: e.latlng.lat, 
       lng: e.latlng.lng
     }); 
-    console.log(markers); 
     this.setState({markers: markers}); 
   }
 
@@ -42,26 +38,22 @@ class MyMap extends Component {
     const index = markers.indexOf(position);
     if (index > -1) {
       markers.splice(index, 1);
-      console.log(markers); 
       this.setState({markers: markers}); 
     }
   }
    
   handleClick() {
     const {markers} = this.state;
-    console.log(markers); 
     axios
       .post('/map/', {
         savedMarkers: markers
       }, {withCredentials: true}) 
       .then((response) => {
         if (response.data.markers) {
-          console.log("react post data" + response.data.markers); 
           this.setState({
             markers: response.data.markers
           }); 
         } else {
-          console.log("react no post data"); 
           this.setState({
             markers: []
           }); 
@@ -79,7 +71,9 @@ class MyMap extends Component {
       onClick={this.addMarker}
     >
       <TileLayer
-        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+        attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 
+        contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
+        Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
         url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
         maxZoom="18"
         id='mapbox.streets'

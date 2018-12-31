@@ -12,14 +12,12 @@ export function getRegister(req, res) {
 }
 
 export function postRegister(req, res) {
-  console.log('user signup');
   const messages = validationResult(req);
   if (!messages.isEmpty()) {
     const message = messages.array(); 
     return res.json({message: message});
     } 
   auth.addUser(req.body).then((results) => {
-    console.log("results:" + results); 
     if (results) {
       const message = [{msg: 'Thank you for signing up, please login!'}]; 
       return res.json({message: message, status: 1}); 
@@ -43,7 +41,6 @@ export function postForgot(req, res) {
     } else  {mailer().sendMail(results, (error, info) => {
       if (error) {
         const message = [{msg: 'Error occurred'}];
-        console.log(message); 
         return res.json({message: message});
       } else {
       const message = [{msg: 'Reset email sent!'}];
@@ -53,14 +50,11 @@ export function postForgot(req, res) {
 }
 
 export function getReset(req, res) {
-  console.log("before: " + req.params.token); 
   auth.reset(req.params).then((resetToken) => {
     if (resetToken === null) {
-      console.log("null: " + resetToken); 
       const message = [{msg: 'Password reset token is invalid or has expired.'}];
       return res.json({message: message, status: 0});
     } else {
-      console.log('not null' + resetToken); 
       return res.json({resetToken: resetToken}); 
       }
   });
@@ -80,7 +74,6 @@ export function postReset(req, res) {
       mailer().sendMail(results, (error, info) => {
         if (error) {
           const message = [{msg: 'Error occurred'}];
-          console.log(message); 
           return res.json({message: message, status: 0});
         } else {
           const message = [{msg: 'Password has been reset'}];

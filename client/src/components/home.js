@@ -22,8 +22,6 @@ class Home extends Component {
 
 handleSubmit(event) {
   event.preventDefault(); 
-  console.log('handleSubmit'); 
-
   axios
       .post('/contact/', {
         comments: this.state.comments,
@@ -32,7 +30,6 @@ handleSubmit(event) {
       }, {withCredentials: true})
       .then(response => {
           if (response.status === 200) {
-              // update App.js state
               this.setState({
                   messages: response.data.message
               }); 
@@ -52,8 +49,8 @@ handleSubmit(event) {
       <div>
         <div class="row">
         <div class="col-md-12">
-        <p>Welcome to Sandy's Mapsite, where you can pin and save locations on a map of the world! Please 
-          register and sign-in to access. If you have questions/comments, please submit below.</p>
+        <p>Welcome to Sandy's Mapsite, where you can pin and save locations 
+          on a map of the world! Please register and sign-in to access. If you have questions/comments, please submit below.</p>
         </div>
         </div>
         <div class="row">
@@ -67,7 +64,7 @@ handleSubmit(event) {
          <div class="col-md-12">
         <form >
           <p><textarea 
-          rows="10" cols="30"
+          rows="5" cols="30"
           name="comments"
             value={this.state.comments}
             placeholder="Questions/Comments"

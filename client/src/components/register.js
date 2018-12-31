@@ -24,10 +24,7 @@ class Register extends Component {
 		}); 
 	}
 	handleSubmit(event) {
-		console.log('sign-up handleSubmit, username: '); 
-		console.log(this.state.username); 
 		event.preventDefault(); 
-		//request to server to add a new username/password
 		axios.post('/auth/', {
       username: this.state.username,
       email: this.state.email,
@@ -35,10 +32,8 @@ class Register extends Component {
       password2: this.state.password2,
 		}, {withCredentials: true})
 			.then(response => {
-        console.log(response);
 				if (response.data.status === 1) {
-          console.log('successful signup'); 
-					this.setState({ //redirect to login page
+					this.setState({ 
             redirectTo: '/login'
 					}); 
 				} else { this.setState({

@@ -60,10 +60,8 @@ export async function sendReset({email}, {host}) {
         expires: { $gt: Date.now() }
        }); 
       if (user === null) {
-        console.log(user); 
         return null; 
         } else {
-          console.log(user); 
           return user.resetToken; 
         } 
     } catch (err) {

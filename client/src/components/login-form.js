@@ -24,23 +24,17 @@ class LoginForm extends Component {
 
     handleSubmit(event) {
         event.preventDefault(); 
-        console.log('handleSubmit'); 
-
         axios
             .post('/auth/login', {
                 username: this.state.username,
                 password: this.state.password
             }, {withCredentials: true})
             .then(response => {
-                console.log('login response: '); 
-                console.log(response); 
                 if (response.status === 200) {
-                    // update App.js state
                     this.props.updateUser({
                         loggedIn: true,
                         username: response.data.username
                     }); 
-                    // update the state to redirect to home
                     this.setState({
                         redirectTo: '/map'
                     }); 
