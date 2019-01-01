@@ -6,20 +6,20 @@ const authRouter = express.Router();
 import passport from 'passport'; 
 
 export function arouter() {
-  authRouter.route('/')
+  authRouter.route('/getuser')
     .get(auth.getRegister) 
     .post([
       body('username', 'Empty Username Field').not().isEmpty().trim().escape(), 
       body('email', 'Invalid Email').not().isEmpty().isEmail().normalizeEmail(), 
       body('password', 'Password must be at least 5 characters').isLength({ min: 5}).trim().escape()
-            .custom((value, {req, loc, path}) => {
-              if (value !== req.body.password2) {
-                throw new Error('Passwords do not match');
-              } else {
-                return value;
-              }
-            })
-      ], auth.postRegister); 
+        .custom((value, {req, loc, path}) => {
+          if (value !== req.body.password2) {
+            throw new Error('Passwords do not match');
+          } else {
+            return value;
+          }
+        })
+    ], auth.postRegister); 
   authRouter.route('/login')
     .post(passport.authenticate('local'),
     (req, res) => {
@@ -45,13 +45,13 @@ export function arouter() {
   .get(auth.getReset)
   .post([
     body('password', 'Password must be at least 5 characters').isLength({ min: 5}).trim().escape()
-        .custom((value, {req, loc, path}) => {
-          if (value !== req.body.password2) {
+      .custom((value, {req, loc, path}) => {
+        if (value !== req.body.password2) {
             throw new Error('Passwords do not match');
-          } else {
-            return value;
-          }
-        })
-    ], auth.postReset); 
-    return authRouter; 
+        } else {
+          return value;
+        }
+      })
+  ], auth.postReset); 
+  return authRouter; 
 } 
