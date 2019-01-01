@@ -1,34 +1,9 @@
-# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
-
-# dependencies
-client/node_modules
 node_modules
-
-# testing
-client/coverage
-
-# production
-client/build
-
-# misc
-client/.DS_Store
-client/.env.local
-client/.env.development.local
-client/.env.test.local
-client/.env.production.local
-
-client/npm-debug.log*
-client/yarn-debug.log*
-client/yarn-error.log*
-venv/
-worldmap.code-workspace
-.env 
+.DS_Store
+/venv
+.env
 server-dest/
+worldmap.code-workspace
 .vscode
 client/src/components/search.js
-
-
-div class="leaflet-container leaflet-touch leaflet-fade-anim leaflet-grab leaflet-touch-drag leaflet-touch-zoom" tabindex="0" style="position: relative;"
-<div class="leaflet-control-container"><div class="leaflet-top leaflet-left">
-
-<div class="geosearch leaflet-bar leaflet-control leaflet-control-geosearch"><form class=" "><input class="glass " type="text" placeholder="Enter address"><a class="reset">X</a><div class="results"></div></form><a class="leaflet-bar-part leaflet-bar-part-single" title="Enter address" href="#"></a></div>
+desttest

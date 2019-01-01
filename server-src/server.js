@@ -16,6 +16,7 @@ import {crouter} from './routes/contactRoutes';
 const contactRouter = crouter(); 
 const port = process.env.PORT || 5000;
 import mongoose from 'mongoose';
+import path from 'path'; 
 mongoose.Promise = global.Promise; 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,7 +26,11 @@ app.use(session({
   resave: true,
   saveUninitialized: true
 })); 
-app.use(csrf()); 
+app.use(
+  process.env.NODE_ENV === 'TEST' ?
+  csrf({ ignoreMethods: ['GET', 'POST']}): 
+  csrf()
+); 
 import {dbConnection} from './database'; 
 dbConnection(); 
 
@@ -34,12 +39,18 @@ passportConfig(app);
 app.use((req, res, next) => {
   let token = req.csrfToken();
   res.cookie('XSRF-TOKEN', token);
-  console.log(token); 
   next();
 });
 app.use(helmet()); 
-app.use('/auth', authRouter); 
-app.use('/map', mapRouter); 
-app.use('/contact', contactRouter); 
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
+app.use('/auth/', authRouter); 
+app.use('/servermap/', mapRouter); 
+app.use('/contact/', contactRouter); 
+// The "catchall" handler: for any request that doesn't
+// match one above, send back React's index.html file.
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
-app.listen(port, () => console.log(`Listening on port ${port}`));
+export const server = app.listen(port, () => console.log(`Listening on port ${port}`));

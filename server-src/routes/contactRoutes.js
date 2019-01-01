@@ -10,6 +10,6 @@ export function crouter() {
       body('comments', 'Empty Message Field').not().isEmpty().trim(), 
       body('name', 'Empty Name Field').not().isEmpty().trim(),
       body('email', 'Invalid Email').isEmail().normalizeEmail()
-      ], contact.postContact); 
+    ], contact.postContact); 
   return contactRouter; 
 } 

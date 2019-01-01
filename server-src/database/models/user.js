@@ -4,7 +4,6 @@ mongoose.Promise = global.Promise;
 
 // Define userSchema
 const userSchema = new mongoose.Schema({
-
   username: { type: String, unique: false, required: false },
   email: { type: String, unique: false, required: false},
   password: { type: String, unique: false, required: false },
@@ -26,11 +25,8 @@ userSchema.methods = {
 // Define hooks for pre-saving
 userSchema.pre('save', function (next) {
 	if (!this.password) {
-		console.log('models/user.js =======NO PASSWORD PROVIDED======='); 
 		next(); 
 	} else {
-		console.log('models/user.js hashPassword in pre save');
-		
 		this.password = this.hashPassword(this.password); 
 		next(); 
 	}
