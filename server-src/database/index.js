@@ -7,6 +7,7 @@ mongoose.Promise = global.Promise;
 const uri = process.env.URL;
 
 export function dbConnection() { 
+<<<<<<< HEAD
   mongoose.connect(uri)
     .then(() => { 
       /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
@@ -16,6 +17,17 @@ export function dbConnection() {
       /** handle initial connection error */ 
       console.log('error connecting to Mongo: ')
       console.log(err);   
+=======
+  mongoose.connect(uri).then(
+    () => { 
+      /** ready to use. The `mongoose.connect()` promise resolves to undefined. */ 
+      console.log('Connected to Mongo: ' + uri);  
+    },
+    err => {
+      /** handle initial connection error */ 
+      console.log('error connecting to Mongo: '); 
+      console.log(err);
+>>>>>>> routing
     }
   );
 } 

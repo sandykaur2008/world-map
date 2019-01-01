@@ -6,7 +6,7 @@ const authRouter = express.Router();
 import passport from 'passport'; 
 
 export function arouter() {
-  authRouter.route('/')
+  authRouter.route('/getuser')
     .get(auth.getRegister) 
     .post([
       body('username', 'Empty Username Field').not().isEmpty().trim().escape(), 
@@ -47,7 +47,11 @@ export function arouter() {
     body('password', 'Password must be at least 5 characters').isLength({ min: 5}).trim().escape()
       .custom((value, {req, loc, path}) => {
         if (value !== req.body.password2) {
+<<<<<<< HEAD
           throw new Error('Passwords do not match');
+=======
+            throw new Error('Passwords do not match');
+>>>>>>> routing
         } else {
           return value;
         }

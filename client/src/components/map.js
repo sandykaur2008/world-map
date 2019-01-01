@@ -15,19 +15,12 @@ class MyMap extends Component {
   }
 
   componentDidMount() {
-    axios.get('/map/', {withCredentials: true}).then(response => {
+    axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
-        this.props.updateUser({
-          loggedIn: true
-        }); 
         this.setState({
           markers: response.data.markers
         }); 
-      } else {
-        this.props.updateUser({
-          loggedIn: true
-        }); 
-      }
+      } 
     });
   }
 
@@ -51,7 +44,11 @@ class MyMap extends Component {
    
   handleClick() {
     const {markers} = this.state;
+<<<<<<< HEAD
     axios.post('/map/', {
+=======
+    axios.post('/servermap/', {
+>>>>>>> routing
       savedMarkers: markers
     }, {withCredentials: true}) 
       .then((response) => {

@@ -21,7 +21,11 @@ class Forgot extends Component {
 
   handleSubmit(event) {
     event.preventDefault(); 
+<<<<<<< HEAD
     axios.post('/auth/forgot', { email: this.state.email}, {withCredentials: true})
+=======
+    axios.post('/auth/forgot', { email: this.state.email }, {withCredentials: true})
+>>>>>>> routing
       .then(response => {
         if (response.status === 200) {
           this.setState({
