@@ -19,13 +19,8 @@ export function postContact(req, res) {
       const message = [{msg: 'Error occurred'}];
       return res.json({message: message});
     } else {
-<<<<<<< HEAD
-    const message = [{msg: 'Thank you for your email!'}];
-    return res.json({message: message});
-=======
       const message = [{msg: 'Thank you for your email!'}];
       return res.json({message: message});
->>>>>>> routing
     }
   });  
 }

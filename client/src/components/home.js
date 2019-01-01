@@ -37,15 +37,9 @@ class Home extends Component {
             messages: response.data.message
           }); 
         }
-<<<<<<< HEAD
-      }).catch(error => {
-        console.log(error);                
-      }); 
-=======
         }).catch(error => {
           console.log(error);                
         }); 
->>>>>>> routing
   }
 
   render() {
@@ -54,11 +48,7 @@ class Home extends Component {
       <div>
         <div class="row">
           <div class="col-md-12">
-<<<<<<< HEAD
-            <p>Welcome to Sandy's Mapsite, where you can pin and save locations 
-=======
             <p>Welcome to "Sandy's Mapsite", where you can pin and save locations 
->>>>>>> routing
             on a map of the world! Please register and sign-in to access. If you 
             have questions/comments, please submit below.</p>
           </div>

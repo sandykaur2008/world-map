@@ -22,20 +22,12 @@ class Navbar extends Component {
           }); 
         }
       }).catch(error => {
-<<<<<<< HEAD
-        console.log(error); 
-=======
         console.log('Logout error'); 
->>>>>>> routing
       }); 
   }
 
   render() {
-<<<<<<< HEAD
-    const loggedIn = this.props.loggedIn;    
-=======
     const loggedIn = this.props.loggedIn;        
->>>>>>> routing
     return (
       <header class="App-header">
         <div class="container"> 

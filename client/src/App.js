@@ -35,11 +35,7 @@ class App extends Component {
   }
 
   getUser() {
-<<<<<<< HEAD
-    axios.get('/auth/', {withCredentials: true}).then(response => {
-=======
     axios.get('/auth/getuser', {withCredentials: true}).then(response => {
->>>>>>> routing
       if (response.data.user) {
         this.setState({
           loggedIn: true,
@@ -68,23 +64,14 @@ class App extends Component {
               this.state.loggedIn ? ( 
                 <Redirect to='/map' /> 
               ) : ( 
-<<<<<<< HEAD
-                <LoginForm updateUser={this.updateUser}  /> ) } />
-=======
               <LoginForm updateUser={this.updateUser}  /> ) } />
->>>>>>> routing
           <Route
             exact path="/map"
             render={() =>
               this.state.loggedIn ? (
                 <MyMap
-<<<<<<< HEAD
-                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} updateUser={this.updateUser}/> 
-              ) : ( <Redirect to="/"/> ) } /> 
-=======
                   map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} /> 
               ) : ( <Redirect to='/'/> ) } /> 
->>>>>>> routing
           <Route
             exact path="/register"
             render={() =>

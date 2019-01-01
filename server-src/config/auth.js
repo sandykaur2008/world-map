@@ -40,11 +40,7 @@ export async function sendReset({email}, {host}) {
         }
       );
       const mailOpts = {
-<<<<<<< HEAD
-        from: "reset@mapsite.com", 
-=======
         from: "sandysmaps.@gmail.com", 
->>>>>>> routing
         to: user.email,
         subject: 'Map site reset!',
         text: 'You are receiving this because you have requested the reset of the password for your account.\n\n' +
@@ -53,19 +49,11 @@ export async function sendReset({email}, {host}) {
         'If you did not request this, please ignore this email and your password will remain unchanged.\n' +
         'Please do not respond to this email.\n'
       }; 
-<<<<<<< HEAD
-        return mailOpts; 
-      } 
-  } catch (err) {
-    console.log(err); 
-    }
-=======
       return mailOpts; 
     } 
   } catch (err) {
     console.log(err); 
   }
->>>>>>> routing
 }  
 
 /* Check if reset token is still valid */
@@ -80,19 +68,11 @@ export async function reset({token}) {
       return user.resetToken; 
     } 
   } catch (err) {
-<<<<<<< HEAD
-      console.log(err); 
-  }
-} 
-
-/* Reset password if token is valid */ 
-=======
     console.log(err); 
   }
 }
 
 /* Reset password if token is valid */
->>>>>>> routing
 export async function doReset({password}, {token}) {
   try {
     const hashedPassword = await bcrypt.hash(password, 10);

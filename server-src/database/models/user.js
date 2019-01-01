@@ -26,11 +26,7 @@ userSchema.methods = {
 userSchema.pre('save', function (next) {
 	if (!this.password) {
 		next(); 
-<<<<<<< HEAD
-	} else {		
-=======
 	} else {
->>>>>>> routing
 		this.password = this.hashPassword(this.password); 
 		next(); 
 	}

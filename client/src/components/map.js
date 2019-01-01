@@ -44,11 +44,7 @@ class MyMap extends Component {
    
   handleClick() {
     const {markers} = this.state;
-<<<<<<< HEAD
-    axios.post('/map/', {
-=======
     axios.post('/servermap/', {
->>>>>>> routing
       savedMarkers: markers
     }, {withCredentials: true}) 
       .then((response) => {

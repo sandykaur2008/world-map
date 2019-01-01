@@ -47,11 +47,7 @@ export function arouter() {
     body('password', 'Password must be at least 5 characters').isLength({ min: 5}).trim().escape()
       .custom((value, {req, loc, path}) => {
         if (value !== req.body.password2) {
-<<<<<<< HEAD
-          throw new Error('Passwords do not match');
-=======
             throw new Error('Passwords do not match');
->>>>>>> routing
         } else {
           return value;
         }
