@@ -7,3 +7,4 @@ worldmap.code-workspace
 .vscode
 client/src/components/search.js
 desttest
+server.js~HEAD
