@@ -17,10 +17,17 @@ class MyMap extends Component {
   componentDidMount() {
     axios.get('/map/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
+        this.props.updateUser({
+          loggedIn: true
+        }); 
         this.setState({
           markers: response.data.markers
         }); 
-      } 
+      } else {
+        this.props.updateUser({
+          loggedIn: true
+        }); 
+      }
     });
   }
 

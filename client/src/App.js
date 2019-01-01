@@ -70,7 +70,7 @@ class App extends Component {
             render={() =>
               this.state.loggedIn ? (
                 <MyMap
-                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} /> 
+                  map={this.state.map} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} updateUser={this.updateUser}/> 
               ) : ( <Redirect to="/"/> ) } /> 
           <Route
             exact path="/register"
