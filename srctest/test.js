@@ -6,7 +6,7 @@ import request from 'request';
 describe('server response', () => {
 
   it('should return 200', (done) => {
-    request.get('http://localhost:5000/auth/', (err, res) => {
+    request.get('http://localhost:5000/auth/getuser', (err, res) => {
       if (err) {
         console.log(err); 
       }
@@ -37,7 +37,7 @@ describe('check validation (invalid entries)', () => {
 
   it('registration form should be invalid due to mismatching passwords', (done) => {
     request.post({
-    url: 'http://localhost:5000/auth/',
+    url: 'http://localhost:5000/auth/getuser',
     form: { username: "example", email: "example@example.com", password: "12345", password2: "123456"}}, (err, res) => {
       if (err) {
         console.log(err);
