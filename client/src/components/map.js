@@ -10,7 +10,7 @@ class MyMap extends Component {
       markers: []
     };
   this.mapRef = React.createRef();
-  this.addMarker = this.addMarker.bind(this);  
+  //this.addMarker = this.addMarker.bind(this);  
   this.clearMarker = this.clearMarker.bind(this);
   this.handleClick = this.handleClick.bind(this); 
   }
@@ -20,10 +20,22 @@ class MyMap extends Component {
     const provider = new OpenStreetMapProvider();
     const searchControl = new GeoSearchControl({
       provider: provider,
+      showPopup: true,
+      autoClose: true,
+      keepResult: true,
+      keepMarker: true, 
+      retainZoomLevel: true,
       style: 'bar'
     }); 
     map.addControl(searchControl); 
-    searchControl.getContainer().onClick = e => { e.stopPropagation(); };
+    map.on('geosearch/showlocation', e => {
+      const {markers} = this.state;
+      markers.push({
+        lat: e.location.y, 
+        lng: e.location.x
+      }); 
+      this.setState({markers: markers}); 
+    }); 
     axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
         this.setState({
@@ -31,16 +43,17 @@ class MyMap extends Component {
         }); 
       } 
     });
+    searchControl.getContainer().onclick = e => { e.stopPropagation(); };
   }
 
-  addMarker(e) {
-    const {markers} = this.state;
-    markers.push({
-      lat: e.latlng.lat, 
-      lng: e.latlng.lng
-    }); 
-    this.setState({markers: markers}); 
-  }
+  // addMarker(e) {
+  //   const {markers} = this.state;
+  //   markers.push({
+  //     lat: e.latlng.lat, 
+  //     lng: e.latlng.lng
+  //   }); 
+  //   this.setState({markers: markers}); 
+  // }
 
   clearMarker(position) {
     const {markers} = this.state;
@@ -80,8 +93,7 @@ class MyMap extends Component {
         <Map 
           center={this.props.center}
           zoom={this.props.zoom} 
-          ref={this.mapRef}
-          onClick={this.addMarker} >
+          ref={this.mapRef} >
           <TileLayer
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 
               contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
