@@ -1,6 +1,7 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
 import axios from 'axios';  
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
 class MyMap extends Component {
   constructor() {
@@ -15,6 +16,13 @@ class MyMap extends Component {
   }
 
   componentDidMount() {
+    const map = this.mapRef.current.leafletElement;
+    const provider = new OpenStreetMapProvider();
+    const searchControl = new GeoSearchControl({
+      provider: provider,
+      style: 'bar'
+    }); 
+    map.addControl(searchControl); 
     axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
         this.setState({
