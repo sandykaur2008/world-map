@@ -23,6 +23,7 @@ class MyMap extends Component {
       style: 'bar'
     }); 
     map.addControl(searchControl); 
+    searchControl.getContainer().onClick = e => { e.stopPropagation(); };
     axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
         this.setState({
