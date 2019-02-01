@@ -36,7 +36,6 @@ class MyMap extends Component {
         }); 
       }
     });
-    searchControl.getContainer().onclick = e => { e.stopPropagation(); };
   }
 
   addMarker(e) {
