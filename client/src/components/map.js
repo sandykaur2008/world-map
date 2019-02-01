@@ -1,6 +1,7 @@
 import React, {Component } from 'react'; 
 import {Map, TileLayer, Marker, Popup} from 'react-leaflet'; 
 import axios from 'axios';  
+import { GeoSearchControl, OpenStreetMapProvider } from 'leaflet-geosearch';
 
 class MyMap extends Component {
   constructor() {
@@ -15,20 +16,35 @@ class MyMap extends Component {
   }
 
   componentDidMount() {
+    const map = this.mapRef.current.leafletElement;
+    const provider = new OpenStreetMapProvider();
+    const searchControl = new GeoSearchControl({
+      provider: provider,
+      showPopup: true,
+      autoClose: true,
+      keepResult: true,
+      keepMarker: true, 
+      retainZoomLevel: true,
+      style: 'bar'
+    }); 
+    map.addControl(searchControl); 
+    map.on('geosearch/showlocation', this.addMarker); 
     axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
         this.setState({
           markers: response.data.markers
         }); 
-      } 
+      }
     });
+    searchControl.getContainer().onclick = e => { e.stopPropagation(); };
   }
 
   addMarker(e) {
     const {markers} = this.state;
     markers.push({
-      lat: e.latlng.lat, 
-      lng: e.latlng.lng
+      position: { lat: e.location.y, 
+        lng: e.location.x },
+      label: e.location.label
     }); 
     this.setState({markers: markers}); 
   }
@@ -64,15 +80,14 @@ class MyMap extends Component {
     return (
       <div>
         <div class="row">
-          <div class="col-md-12"><br></br>
+          <div class="col-md-12">
             <p><button onClick={this.handleClick}>Save</button></p>
           </div>
         </div>        
         <Map 
           center={this.props.center}
           zoom={this.props.zoom} 
-          ref={this.mapRef}
-          onClick={this.addMarker} >
+          ref={this.mapRef} >
           <TileLayer
             attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 
               contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
@@ -81,10 +96,11 @@ class MyMap extends Component {
             maxZoom="18"
             id='mapbox.streets'
             accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ" />
-          {this.state.markers.map((position, idx) => 
-            <Marker key={`marker-${idx}`} position={position}>
-              <Popup position={position}>
-                <button onClick={(e) => this.clearMarker(position)}>Delete</button>
+          {this.state.markers.map((marker, idx) => 
+            <Marker key={`marker-${idx}`} position={marker.position}>
+              <Popup marker={marker} >
+                <p>{marker.label}</p>
+                <button onClick={(e) => this.clearMarker(marker)}>Delete</button>
               </Popup>
             </Marker>
           )}
