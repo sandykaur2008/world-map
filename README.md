@@ -1,5 +1,5 @@
 # Sandy's Mapsite
-This project is called "Sandy's Mapsite" and it's a place to pin and save locations on a map of the world. It has also been a way for me to practice developing with the MERN (MongoDB, Express, React, Node.js) stack. Frontend has been styled with Bootstrap. Deployed with Heroku at https://sandysmapsite.herokuapp.com/. Map component built with react-leaflet and leaflet geosearch. 
+This project is called "Sandy's Mapsite" and it's a place to pin and save locations on a map of the world. It has also been a way for me to practice developing with the MERN (MongoDB, Express, React, Node.js) stack. Frontend has been styled with Bootstrap. Deployed with Heroku at https://sandysmapsite.herokuapp.com/. Map component built with react-leaflet and leaflet-geosearch. 
 
 # Getting Started
 To contribute:
