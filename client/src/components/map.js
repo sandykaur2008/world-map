@@ -10,7 +10,7 @@ class MyMap extends Component {
       markers: []
     };
   this.mapRef = React.createRef();
-  //this.addMarker = this.addMarker.bind(this);  
+  this.addMarker = this.addMarker.bind(this);  
   this.clearMarker = this.clearMarker.bind(this);
   this.handleClick = this.handleClick.bind(this); 
   }
@@ -28,32 +28,26 @@ class MyMap extends Component {
       style: 'bar'
     }); 
     map.addControl(searchControl); 
-    map.on('geosearch/showlocation', e => {
-      const {markers} = this.state;
-      markers.push({
-        lat: e.location.y, 
-        lng: e.location.x
-      }); 
-      this.setState({markers: markers}); 
-    }); 
+    map.on('geosearch/showlocation', this.addMarker); 
     axios.get('/servermap/', {withCredentials: true}).then(response => {
       if (response.data.markers) {
         this.setState({
           markers: response.data.markers
         }); 
-      } 
+      }
     });
     searchControl.getContainer().onclick = e => { e.stopPropagation(); };
   }
 
-  // addMarker(e) {
-  //   const {markers} = this.state;
-  //   markers.push({
-  //     lat: e.latlng.lat, 
-  //     lng: e.latlng.lng
-  //   }); 
-  //   this.setState({markers: markers}); 
-  // }
+  addMarker(e) {
+    const {markers} = this.state;
+    markers.push({
+      position: { lat: e.location.y, 
+        lng: e.location.x },
+      label: e.location.label
+    }); 
+    this.setState({markers: markers}); 
+  }
 
   clearMarker(position) {
     const {markers} = this.state;
@@ -86,7 +80,7 @@ class MyMap extends Component {
     return (
       <div>
         <div class="row">
-          <div class="col-md-12"><br></br>
+          <div class="col-md-12">
             <p><button onClick={this.handleClick}>Save</button></p>
           </div>
         </div>        
@@ -102,10 +96,11 @@ class MyMap extends Component {
             maxZoom="18"
             id='mapbox.streets'
             accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ" />
-          {this.state.markers.map((position, idx) => 
-            <Marker key={`marker-${idx}`} position={position}>
-              <Popup position={position}>
-                <button onClick={(e) => this.clearMarker(position)}>Delete</button>
+          {this.state.markers.map((marker, idx) => 
+            <Marker key={`marker-${idx}`} position={marker.position}>
+              <Popup marker={marker} >
+                <p>{marker.label}</p>
+                <button onClick={(e) => this.clearMarker(marker)}>Delete</button>
               </Popup>
             </Marker>
           )}
