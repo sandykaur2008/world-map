@@ -12,3 +12,7 @@
   padding-right: 1em; 
   color: palevioletred
 }
+
+.leaflet-control-geosearch.bar {
+  width: 60%
+}
