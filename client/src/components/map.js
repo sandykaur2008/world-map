@@ -83,28 +83,33 @@ class MyMap extends Component {
           <div class="col-md-12">
             <p><button onClick={this.handleClick}>Save</button></p>
           </div>
-        </div>        
-        <Map 
-          center={this.props.center}
-          zoom={this.props.zoom} 
-          ref={this.mapRef} >
-          <TileLayer
-            attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 
-              contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
-              Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
-            url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
-            maxZoom="18"
-            id='mapbox.streets'
-            accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ" />
-          {this.state.markers.map((marker, idx) => 
-            <Marker key={`marker-${idx}`} position={marker.position}>
-              <Popup marker={marker} >
-                <p>{marker.label}</p>
-                <button onClick={(e) => this.clearMarker(marker)}>Delete</button>
-              </Popup>
-            </Marker>
-          )}
-        </Map>
+        </div>  
+        <div class="row">
+          <div class="col-md-12">      
+            <Map 
+              center={this.props.center}
+              zoom={this.props.zoom} 
+              ref={this.mapRef} >
+              <TileLayer
+                attribution='Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> 
+                contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, 
+                Imagery © <a href="https://www.mapbox.com/">Mapbox</a>'
+                url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
+                maxZoom="18"
+                id='mapbox.streets'
+                accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ" />
+              {this.state.markers.map((marker, idx) => 
+                <Marker key={`marker-${idx}`} position={marker.position}>
+                  <Popup marker={marker} >
+                    <p>{marker.label}</p>
+                    <button onClick={(e) => this.clearMarker(marker)}>Delete</button>
+                  </Popup>
+                </Marker>
+              )}
+            </Map>
+          </div>
+        </div> 
+        <br></br> 
       </div>
     );
   }
