@@ -52,4 +52,4 @@ Thanks, @github/markalexandercastillo, for your help. :relaxed:
 Also, found https://github.com/dceddia/rando very helpful. 
 
 # To Do
-Want to add more functionality to map - have search bar, name of location on pin markers. Would like to learn how to test React frontend well and need to fix issue with map routing. 
+Would like to learn how to test React frontend well and need to fix issue with map routing. 
