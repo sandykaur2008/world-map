@@ -1,6 +1,7 @@
 import React, { Component } from 'react'; 
 import { Redirect } from 'react-router-dom'; 
 import axios from 'axios'; 
+import LoginForm from './login-form';
 
 class Register extends Component {
 	constructor() {
@@ -34,10 +35,13 @@ class Register extends Component {
 		}, {withCredentials: true})
 			.then(response => {
 				if (response.data.status === 1) {
-					this.setState({ 
-            redirectTo: '/login'
-					}); 
-				} else { 
+          var loginscreen=[];
+          loginscreen.push(<LoginForm parentContext={this}/>);
+          this.props.parentContext.setState({loginscreen:loginscreen,
+          buttonLabel:"Register",
+          isLogin:true
+        });}
+        else { 
           this.setState({
             messages: response.data.message
           }); 
@@ -54,16 +58,11 @@ class Register extends Component {
 		    <div>
           <div class="row">
             <div class="col-md-12">
-			        <h4>Sign up</h4>
+			        <h4>Register</h4>
             </div>
           </div> 
           <div class="row">
-            <div class="col-md-12">
-              <p>Upon successful signup, you will be redirected to login page.</p>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-md-12">
+            <div class="messages col-md-12">
               {messages ? (
                 messages.map((message, index) =>
                   <p key={index}><strong>{message.msg}</strong></p>) 
@@ -80,7 +79,6 @@ class Register extends Component {
 					        placeholder="Username"
 					        value={this.state.username}
 					        onChange={this.handleChange} /></p>
-                <label className="form-label" htmlFor="username">Username</label>
 				        <p><input className="form-input"
 					        type="text"
 					        id="email"
@@ -88,22 +86,19 @@ class Register extends Component {
 					        placeholder="Email"
 					        value={this.state.email}
 					        onChange={this.handleChange} /></p>
-                <label className="form-label" htmlFor="email">Email</label>           
 				        <p><input className="form-input"
 					        placeholder="Password"
 					        type="password"
 					        name="password"
 					        value={this.state.password}
 					        onChange={this.handleChange} /></p>
-				        <label className="form-label" htmlFor="password">Password</label>            
                 <p><input className="form-input"
                   placeholder="Confirm Password"
                   type="password"
                   name="password2"
                   value={this.state.password2}
                   onChange={this.handleChange} /></p>
-                <label className="form-label" htmlFor="password2">Confirm Password</label>
-				        <p><button onClick={this.handleSubmit} type="submit">Sign up</button></p>
+				        <p><button onClick={this.handleSubmit} type="submit">Register</button></p>
 			        </form>
             </div>
           </div>

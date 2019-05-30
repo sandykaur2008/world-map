@@ -1,94 +1,64 @@
 import React, { Component } from 'react';  
-import axios from 'axios'; 
+import Register from './register';
+import LoginForm from './login-form';
 
 class Home extends Component {
   constructor() {
     super();
     this.state = {
-      comments: '',
-      name: '',
-      email: '',
-      messages: null
+      username:'',
+      password:'',
+      loginscreen:[],
+      buttonLabel:'Register',
+      isLogin:true
     };
-    this.handleSubmit = this.handleSubmit.bind(this); 
-    this.handleChange = this.handleChange.bind(this); 
+    this.handleClick = this.handleClick.bind(this); 
   }
 
-  handleChange(event) {
+  componentWillMount(){
+    var loginscreen=[];
+    loginscreen.push(<LoginForm parentContext={this} appContext={this.props.parentContext}/>);
     this.setState({
-      [event.target.name]: event.target.value
-    }); 
+                  loginscreen:loginscreen,
+                    })
   }
 
-  handleSubmit(event) {
-    event.preventDefault(); 
-    axios.post('/contact/', {
-      comments: this.state.comments,
-      name: this.state.name,
-      email: this.state.email
-    }, {withCredentials: true})
-      .then(response => {
-        if (response.status === 200) {
-          this.setState({
-            messages: response.data.message
-          }); 
-        } else {
-          this.setState({
-            messages: response.data.message
-          }); 
-        }
-        }).catch(error => {
-          console.log(error);                
-        }); 
+  handleClick(){
+    if(this.state.isLogin){
+      var loginscreen=[];
+      loginscreen.push(<Register parentContext={this}/>);
+      this.setState({
+                     loginscreen:loginscreen,
+                     buttonLabel:"Login",
+                     isLogin:false
+                   })
+    }
+    else{
+      var loginscreen=[];
+      loginscreen.push(<LoginForm parentContext={this}/>);
+      this.setState({
+                     loginscreen:loginscreen,
+                     buttonLabel:"Register",
+                     isLogin:true
+                   })
+    }
   }
 
   render() {
-    const messages = this.state.messages; 
     return (
-      <div>
+      <div className="loginscreen">
         <div class="row">
           <div class="col-md-12">
-            <p>Welcome to "Sandy's Mapsite", where you can pin and save locations 
-            on a map of the world! Please register and sign-in to access. If you 
-            have questions/comments, please submit below.</p>
+            <p className='header'>Welcome to "Sandy's Mapsite", where you can pin and save locations 
+            on a map of the world! Please register and login to access.</p>
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12">
-            {messages ? (
-              messages.map((message, index) => 
-              <p key={index}><strong>{message.msg}</strong></p>) 
-              ) : null }
-         </div>
-        </div> 
-        <div class="row">
-          <div class="col-md-12">
-            <form>
-              <p><textarea 
-                rows="5" cols="30"
-                name="comments"
-                value={this.state.comments}
-                placeholder="Questions/Comments"
-                onChange={this.handleChange}/></p>
-              <label className="form-label" htmlFor="comments">Questions/Comments</label>
-              <p><input className="form-input"
-                placeholder="Name"
-                name="name"
-                value={this.state.name}
-                onChange={this.handleChange} /></p>
-              <label className="form-label" htmlFor="name">Name</label>
-              <p><input className="form-input"
-                placeholder="Email"
-                type="text"
-                id="email"
-                name="email"
-                value={this.state.email}
-                onChange={this.handleChange} /></p>
-              <label className="form-label" htmlFor="email">Email</label>
-              <p><button onClick={this.handleSubmit} type="submit">Submit</button></p>
-            </form>    
+        <div>
+          {this.state.loginscreen}
+          <div> 
+            <p><button onClick={this.handleClick} type="button">{this.state.buttonLabel}</button></p>
           </div>
-        </div>  
+        </div>
       </div>
     ); 
   }

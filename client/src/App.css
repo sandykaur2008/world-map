@@ -1,19 +1,27 @@
-.App-header {
-  margin-top: 0.5em; 
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(20px + 2vmin);
-  font-family: "Snell Roundhand", "cursive";  
-}
-
-.App-link {
-  padding-right: 1em; 
-  color: palevioletred
-}
-
 .leaflet-control-geosearch.bar {
   width: 60%
+}
+
+p.header {
+  margin-top: 3em;
+}
+
+main.container {
+  text-align: center;
+}
+
+button {
+  width: 6em;
+  margin-top: 1em;
+}
+
+input {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  margin: 1em 0 0 0;
+}
+
+.messages {
+  color: red;
 }
