@@ -36,6 +36,7 @@ main.container {
 
 button {
   width: 6em;
+  cursor: pointer;
 }
 
 input {

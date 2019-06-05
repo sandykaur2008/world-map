@@ -22,11 +22,9 @@ class MyMap extends Component {
     const provider = new OpenStreetMapProvider();
     const searchControl = new GeoSearchControl({
       provider: provider,
-      showPopup: true,
       autoClose: true,
-      keepResult: true,
-      keepMarker: true, 
-      retainZoomLevel: true,
+      keepResult: false,
+      retainZoomLevel: false,
       style: 'bar'
     }); 
     map.addControl(searchControl); 
@@ -97,9 +95,6 @@ class MyMap extends Component {
         <button onClick={this.logout} class="blue" type="button">Logout</button>
         </div>
       </header> 
-      {/* <main className="container">
-        <div class="row">
-          <div class="col-md-12">       */}
             <Map 
               center={this.props.center}
               zoom={this.props.zoom} 
@@ -121,12 +116,6 @@ class MyMap extends Component {
                 </Marker>
               )}
             </Map>
-          {/* </div> */}
-        {/* // </div>  */}
-        {/* // <br></br> 
-        // <br></br>
-        // <br></br>
-        // </main> */}
       </div>
     );
   }
