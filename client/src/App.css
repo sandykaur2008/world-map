@@ -1,5 +1,19 @@
+.App-header {
+  margin-bottom: 0.5em; 
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #23d3fb;
+}
+
 .leaflet-control-geosearch.bar {
   width: 60%
+}
+
+.leaflet-popup-content {
+  text-align: center;
 }
 
 p.header {
@@ -8,11 +22,11 @@ p.header {
 
 main.container {
   text-align: center;
+  margin-bottom: 2em;
 }
 
 button {
   width: 6em;
-  margin-top: 1em;
 }
 
 input {
@@ -24,4 +38,30 @@ input {
 
 .messages {
   color: red;
+}
+
+button.blue {
+  border: none;
+  color: white;
+  background: #23d3fb;
+  font-weight: bold;
+}
+
+button.blue.submit {
+  border-radius: 0.2em;
+  height: 2em;
+  margin-top: 1em;
+}
+
+header button.blue {
+  float: right;
+  height: 3.5em;
+}
+
+header button.blue:hover {
+  background: #88e9ff;
+}
+
+header button.blue:focus {
+  outline: 0;
 }

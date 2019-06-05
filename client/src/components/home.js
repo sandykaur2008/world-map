@@ -46,19 +46,23 @@ class Home extends Component {
 
   render() {
     return (
-      <div className="loginscreen">
+      <div>
+      <header class='App-header'>           
+        <div class='container'> 
+          <button onClick={this.handleClick} class="blue" type="button">{this.state.buttonLabel}</button>
+        </div>
+      </header>
+      <main className="loginscreen container">
         <div class="row">
           <div class="col-md-12">
             <p className='header'>Welcome to "Sandy's Mapsite", where you can pin and save locations 
-            on a map of the world! Please register and login to access.</p>
+            on a map of the world! Please login to access.</p>
           </div>
         </div>
         <div>
           {this.state.loginscreen}
-          <div> 
-            <p><button onClick={this.handleClick} type="button">{this.state.buttonLabel}</button></p>
-          </div>
         </div>
+      </main>
       </div>
     ); 
   }

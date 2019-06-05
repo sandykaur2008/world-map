@@ -98,7 +98,7 @@ class Register extends Component {
                   name="password2"
                   value={this.state.password2}
                   onChange={this.handleChange} /></p>
-				        <p><button onClick={this.handleSubmit} type="submit">Register</button></p>
+				        <p><button class="blue submit" onClick={this.handleSubmit} type="submit">Register</button></p>
 			        </form>
             </div>
           </div>
