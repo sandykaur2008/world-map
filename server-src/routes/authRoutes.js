@@ -4,6 +4,7 @@ import * as auth from '../controllers/authController';
 import { body } from 'express-validator/check'; 
 const authRouter = express.Router(); 
 import passport from 'passport'; 
+import jwt from 'jsonwebtoken';
 
 export function arouter() {
   authRouter.route('/getuser')
@@ -23,10 +24,12 @@ export function arouter() {
   authRouter.route('/login')
     .post(passport.authenticate('local'),
     (req, res) => {
-      var userInfo = {
-        username: req.user.username
-      };
-      res.send(userInfo);
+      const email = req.user.email;
+      const token = jwt.sign({email: email}, process.env.SECRET, {
+        expiresIn: '1h'
+      });
+      res.cookie('token', token, { httpOnly: true })
+        .sendStatus(200);
     }); 
   authRouter.route('/logout')
     .post((req, res) => {

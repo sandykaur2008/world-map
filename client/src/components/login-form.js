@@ -12,7 +12,6 @@ class LoginForm extends Component {
       redirectTo: null,
       messages: false,
     }; 
-    this.mapRef = React.createRef();
     this.handleSubmit = this.handleSubmit.bind(this); 
     this.handleChange = this.handleChange.bind(this); 
   }
@@ -31,9 +30,7 @@ class LoginForm extends Component {
     }, {withCredentials: true})
       .then(response => {
         if (response.status === 200) {
-          var uploadScreen = [];
-          uploadScreen.push(<MyMap appContext={this.props.appContext} map={'map'} center={{ lat: 20, lng: -0.09 }} zoom={2} ref={this.mapRef} /> );
-          this.props.appContext.setState({loginPage:[],uploadScreen:uploadScreen}); 
+          this.setState({redirectTo: '/'}); 
         }
       }).catch(error => {
         console.log(error); 

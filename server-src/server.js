@@ -17,12 +17,13 @@ const contactRouter = crouter();
 const port = process.env.PORT || 5000;
 import mongoose from 'mongoose';
 import path from 'path'; 
+import {withAuth} from './middleware'; 
 mongoose.Promise = global.Promise; 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(session({
-  secret: process.env.SESSION_SECRET,
+  secret: process.env.SECRET,
   resave: true,
   saveUninitialized: true
 })); 
@@ -45,8 +46,11 @@ app.use(helmet());
 // Serve static files from the React app
 app.use(express.static(path.join(__dirname, '../client/build')));
 app.use('/auth/', authRouter); 
-app.use('/servermap/', mapRouter); 
+app.use('/servermap/', (req, res, next) => {withAuth(req, res, next);}, mapRouter); 
 app.use('/contact/', contactRouter); 
+app.get('/checkToken', (req, res, next) => {withAuth(req, res, next);}, function(req, res) {
+  res.sendStatus(200);
+});
 // The "catchall" handler: for any request that doesn't
 // match one above, send back React's index.html file.
 app.get('/*', (req, res) => {

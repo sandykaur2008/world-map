@@ -1,31 +1,14 @@
 import React, { Component } from 'react';
-import Home from './components/home'; 
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
+import withAuth from './components/withAuth';
 
 class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      loginPage: [], 
-      uploadScreen: [],
-    }; 
-    this.componentWillMount = this.componentWillMount.bind(this); 
-  }
-
-  componentWillMount(){
-    var loginPage =[];
-    loginPage.push(<Home parentContext={this}/>);
-    this.setState({
-                  loginPage:loginPage
-                    })
-  }
-
   render() {
     return (
-      <div className='App'>
-          {this.state.loginPage}
-          {this.state.uploadScreen}
-      </div>
+      <Switch>
+        <Route path="/" component={withAuth()} />
+    </Switch>
     );
   }
 }
