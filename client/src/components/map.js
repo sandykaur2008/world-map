@@ -13,6 +13,8 @@ class MyMap extends Component {
   this.addMarker = this.addMarker.bind(this);  
   this.clearMarker = this.clearMarker.bind(this);
   this.handleClick = this.handleClick.bind(this); 
+  this.logout = this.logout.bind(this);
+  this.key = process.env.REACT_APP_MAP_TOKEN;
   }
 
   componentDidMount() {
@@ -74,17 +76,30 @@ class MyMap extends Component {
         }
       }); 
   }
-    
+  
+  logout() {
+    axios.post('/auth/logout', {withCredentials: true})
+      .then(response => {
+        if (response.status === 200) {
+          this.setState({redirectTo: '/'}); 
+        }
+      }).catch(error => {
+        console.log('Logout error'); 
+      }); 
+  }
+
   render() {
     return (
-      <div>
+      <div id='fullscreen'>
+        <header class='App-header fullscreen'>           
+        <div class='container'> 
+        <button class='blue' type='button' onClick={this.handleClick}>Save</button>
+        <button onClick={this.logout} class="blue" type="button">Logout</button>
+        </div>
+      </header> 
+      {/* <main className="container">
         <div class="row">
-          <div class="col-md-12">
-            <p><button onClick={this.handleClick}>Save</button></p>
-          </div>
-        </div>  
-        <div class="row">
-          <div class="col-md-12">      
+          <div class="col-md-12">       */}
             <Map 
               center={this.props.center}
               zoom={this.props.zoom} 
@@ -96,7 +111,7 @@ class MyMap extends Component {
                 url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
                 maxZoom="18"
                 id='mapbox.streets'
-                accessToken="pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ" />
+                accessToken={this.key} />
               {this.state.markers.map((marker, idx) => 
                 <Marker key={`marker-${idx}`} position={marker.position}>
                   <Popup marker={marker} >
@@ -106,11 +121,12 @@ class MyMap extends Component {
                 </Marker>
               )}
             </Map>
-          </div>
-        </div> 
-        <br></br> 
-        <br></br>
-        <br></br>
+          {/* </div> */}
+        {/* // </div>  */}
+        {/* // <br></br> 
+        // <br></br>
+        // <br></br>
+        // </main> */}
       </div>
     );
   }

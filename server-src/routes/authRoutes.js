@@ -35,7 +35,8 @@ export function arouter() {
     .post((req, res) => {
       if (req.user) {
         req.logout();
-        res.send({ msg: 'logging out' }); 
+        res.clearCookie('token', { httpOnly: true}) 
+          .sendStatus(200);
       } else {
         res.send({ msg: 'no user to log out' });
       }

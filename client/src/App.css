@@ -1,3 +1,7 @@
+html, body, #root, #fullscreen {
+  height: 100%;
+}
+
 .App-header {
   margin-bottom: 0.5em; 
   text-align: center;
@@ -5,7 +9,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #23d3fb;
+  background: black;
+}
+
+.App-header.fullscreen {
+  margin-bottom: 0;
 }
 
 .leaflet-control-geosearch.bar {
@@ -44,7 +52,7 @@ input {
 button.blue {
   border: none;
   color: white;
-  background: #23d3fb;
+  background: black;
   font-weight: bold;
 }
 
@@ -60,7 +68,7 @@ header button.blue {
 }
 
 header button.blue:hover {
-  background: #88e9ff;
+  background: darkslategrey;
 }
 
 header button.blue:focus {
