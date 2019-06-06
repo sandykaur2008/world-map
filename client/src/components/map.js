@@ -79,7 +79,8 @@ class MyMap extends Component {
     axios.post('/auth/logout', {withCredentials: true})
       .then(response => {
         if (response.status === 200) {
-          this.setState({redirectTo: '/'}); 
+          document.cookie='token=None'; 
+          document.location.reload();
         }
       }).catch(error => {
         console.log('Logout error'); 

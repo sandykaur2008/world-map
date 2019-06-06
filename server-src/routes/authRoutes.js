@@ -28,15 +28,14 @@ export function arouter() {
       const token = jwt.sign({email: email}, process.env.SECRET, {
         expiresIn: '1h'
       });
-      res.cookie('token', token, { httpOnly: true })
+      res.cookie('token', token)
         .sendStatus(200);
     }); 
   authRouter.route('/logout')
     .post((req, res) => {
       if (req.user) {
         req.logout();
-        res.clearCookie('token', { httpOnly: true}) 
-          .sendStatus(200);
+        res.send({ msg: 'logging out' }); 
       } else {
         res.send({ msg: 'no user to log out' });
       }
