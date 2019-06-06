@@ -14,7 +14,7 @@ class MyMap extends Component {
   this.clearMarker = this.clearMarker.bind(this);
   this.handleClick = this.handleClick.bind(this); 
   this.logout = this.logout.bind(this);
-  this.key = process.env.REACT_APP_MAP_TOKEN;
+  // this.key = process.env.REACT_APP_MAP_TOKEN;
   }
 
   componentDidMount() {
@@ -107,7 +107,7 @@ class MyMap extends Component {
                 url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
                 maxZoom="18"
                 id='mapbox.streets'
-                accessToken={this.key} />
+                accessToken='pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ' />
               {this.state.markers.map((marker, idx) => 
                 <Marker key={`marker-${idx}`} position={marker.position}>
                   <Popup marker={marker} >
