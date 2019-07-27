@@ -7,9 +7,10 @@ export default function withAuth() {
   return class extends Component {
     constructor() {
       super();
+      var cookieValue = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
       this.state = {
-        home: true,
-        map: false,
+        home: !cookieValue || cookieValue === 'None' ?  true : false,
+        map: !cookieValue || cookieValue === 'None' ?  false : true,
       };
       this.mapRef = React.createRef();
     }
