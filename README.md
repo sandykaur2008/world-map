@@ -1,5 +1,5 @@
 # Sandy's Mapsite
-This project is called "Sandy's Mapsite" and it's a place to pin and save locations on a map of the world. It has also been a way for me to practice developing with the MERN (MongoDB, Express, React, Node.js) stack. Frontend has been styled with Bootstrap. Deployed with Heroku at https://sandysmapsite.herokuapp.com/. Map component built with react-leaflet and leaflet-geosearch. 
+This project is called "Sandy's Mapsite" and it's a place to pin and save locations on a map of the world. It has also been a way for me to practice developing with the MERN (MongoDB, Express, React, Node.js) stack. Frontend has been styled with Bootstrap. Dockerized and deployed with Amazon Fargate at https://spk.sandysmapsite.com. Map component built with react-leaflet and leaflet-geosearch. 
 
 # Getting Started
 To contribute:
@@ -28,7 +28,7 @@ Make sure you're in root directory of repo and execute:
 ## To get create-react-app build (which will be served by server as static files)
 Make sure you're in root directory of repo and execute:
 
-```npm run heroku-postbuild```
+```npm run build```
 
 ## To actually run website once repo cloned, dependencies installed, appropriate files compiled
 - Navigate to root directory
