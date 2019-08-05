@@ -7,7 +7,8 @@ class MyMap extends Component {
   constructor() {
     super();
     this.state = {
-      markers: []
+      markers: [],
+      map_token: process.env.REACT_APP_MAP_TOKEN
     };
   this.mapRef = React.createRef();
   this.addMarker = this.addMarker.bind(this);  
@@ -107,7 +108,7 @@ class MyMap extends Component {
                 url='https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}'
                 maxZoom="18"
                 id='mapbox.streets'
-                accessToken='pk.eyJ1Ijoic2FuZHlrYXVyMjAwOCIsImEiOiJjanBybGFwNmUxMmJjM3hvM3VwMWxxYWN1In0.FdxuHjxYWRN5-V59QXPDUQ' />
+                accessToken={this.state.map_token} />
               {this.state.markers.map((marker, idx) => 
                 <Marker key={`marker-${idx}`} position={marker.position}>
                   <Popup marker={marker} >
